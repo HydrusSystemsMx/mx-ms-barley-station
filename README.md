@@ -1,3 +1,3 @@
-# barleystation API V. 1.0.0
+# Barleystation API V. 1.0.0
 
 

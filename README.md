@@ -1,6 +1,3 @@
 # barleystation API
 
-/* 
- *  Skycode 
- * /
 

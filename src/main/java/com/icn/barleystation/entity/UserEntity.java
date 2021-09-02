@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.Nullable;
+
 @Table(name = "USER")
 @Entity
 public class UserEntity {
@@ -14,11 +16,13 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUser;
 	private String name;
+	@Nullable
 	private String nickname;
 	private String mail;
 	private String phone;
 	private String password;
 	private String address;
+	@Nullable
 	private Boolean status;
 
 	@Override

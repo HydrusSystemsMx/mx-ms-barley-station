@@ -1,12 +1,20 @@
 package com.icn.barleystation.entity;
 
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.sun.istack.Nullable;
+import org.springframework.lang.Nullable;
 
 @Table(name = "USER")
 @Entity
@@ -24,11 +32,17 @@ public class UserEntity {
 	private String address;
 	@Nullable
 	private Boolean status;
+	private Date createdDate;
 
-	@Override
-	public String toString() {
-		return "UserEntity [idUser=" + idUser + ", name=" + name + ", nickname=" + nickname + ", mail=" + mail
-				+ ", phone=" + phone + ", password=" + password + ", address=" + address + ", status=" + status + "]";
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "USERPROFILE", joinColumns = @JoinColumn(name = "idUser"), inverseJoinColumns = @JoinColumn(name = "idProfile"))
+	private List<ProfileEntity> profile;
+
+	public void addProfile(ProfileEntity tempProfile) {
+		if (profile == null) {
+			profile = new LinkedList<ProfileEntity>();
+		}
+		profile.add(tempProfile);
 	}
 
 	public Integer getIdUser() {
@@ -93,6 +107,29 @@ public class UserEntity {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public List<ProfileEntity> getProfile() {
+		return profile;
+	}
+
+	public void setProfile(List<ProfileEntity> profile) {
+		this.profile = profile;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [idUser=" + idUser + ", name=" + name + ", nickname=" + nickname + ", mail=" + mail
+				+ ", phone=" + phone + ", password=" + password + ", address=" + address + ", status=" + status
+				+ ", createdDate=" + createdDate + ", profile=" + profile + "]";
 	}
 
 }

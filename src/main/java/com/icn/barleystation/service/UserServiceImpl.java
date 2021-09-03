@@ -1,6 +1,7 @@
 package com.icn.barleystation.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.icn.barleystation.entity.ProfileEntity;
 import com.icn.barleystation.entity.UserEntity;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.model.UserRequest;
@@ -26,8 +28,13 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public ResponseEntity<UserResponse> createNewUser(UserRequest request) {
 		UserResponse response = new UserResponse();
+		ProfileEntity profile = new ProfileEntity();
+		profile.setIdProfile(3);
+		
 		try {
 			request.getRequestUser().setStatus(true);
+			request.getRequestUser().setCreatedDate(new Date());
+			request.getRequestUser().addProfile(profile);
 			repoUsers.save(request.getRequestUser());
 			response.setResponse(request.getRequestUser());
 			status = HttpStatus.CREATED;

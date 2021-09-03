@@ -1,9 +1,13 @@
 package com.icn.barleystation.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "ITEM")
@@ -18,11 +22,14 @@ public class ItemEntity {
 	private String image;
 	private String details;
 	private Boolean status;
-	
-	@Override
-	public String toString() {
-		return "ItemEntity [idItem=" + idItem + ", nameItem=" + nameItem + ", price=" + price + ", image=" + image
-				+ ", details=" + details + ", status=" + status + "]";
+	@OneToOne // Relacion uno a uno
+	@JoinColumn(name = "idBrand")
+	private BrandEntity brand;
+	private Date createdDate;
+
+	public ItemEntity() {
+		this.status = true;
+		this.createdDate = new Date();
 	}
 
 	public Integer getIdItem() {
@@ -72,5 +79,22 @@ public class ItemEntity {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public BrandEntity getBrand() {
+		return brand;
+	}
+
+	public void setBrand(BrandEntity brand) {
+		this.brand = brand;
+	}
+
 
 }

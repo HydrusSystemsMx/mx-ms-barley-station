@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.ItemResponse;
 import com.icn.barleystation.model.RequestItem;
+import com.icn.barleystation.service.IBrandService;
 import com.icn.barleystation.service.IItemService;
 
 @RestController

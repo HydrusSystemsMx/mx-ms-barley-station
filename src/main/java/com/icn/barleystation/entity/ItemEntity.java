@@ -96,5 +96,4 @@ public class ItemEntity {
 		this.brand = brand;
 	}
 
-
 }

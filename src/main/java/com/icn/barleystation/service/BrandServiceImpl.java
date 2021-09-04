@@ -68,4 +68,21 @@ public class BrandServiceImpl implements IBrandService {
 		return new ResponseEntity<BrandResponse>(response, status);
 	}
 
+	@Override
+	public List<BrandResponse> getAllBrands() {
+		List<BrandResponse> response = new ArrayList<BrandResponse>();
+		try {
+			List<BrandEntity> allItems = brandRepo.findAll();
+
+			for (BrandEntity list : allItems) {
+				BrandResponse brandResponse = new BrandResponse();
+				brandResponse.setResponse(list);
+				response.add(brandResponse);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return response;
+	}
+
 }

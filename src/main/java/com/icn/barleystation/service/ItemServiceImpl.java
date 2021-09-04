@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.icn.barleystation.entity.BrandEntity;
 import com.icn.barleystation.entity.ItemEntity;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.model.ItemResponse;
@@ -81,6 +82,24 @@ public class ItemServiceImpl implements IItemService {
 		listError.add(error);
 
 		return listError;
+	}
+
+	@Override
+	public List<ItemResponse> getItemByIdBrand(BrandEntity brand) {
+		List<ItemResponse> response = new ArrayList<ItemResponse>();
+		try {
+			List<ItemEntity> allItems = repoItem.findByBrand(brand);
+
+			for (ItemEntity list : allItems) {
+				ItemResponse itemResponse = new ItemResponse();
+				itemResponse.setResponse(list);
+				response.add(itemResponse);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return response;
+
 	}
 
 }

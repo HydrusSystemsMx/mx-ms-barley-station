@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icn.barleystation.model.BrandResponse;
@@ -24,6 +25,9 @@ public class ItemController {
 	@Autowired
 	private IItemService itemService;
 
+	@Autowired
+	private IBrandService brandService;
+
 	@PostMapping("/create")
 	public ResponseEntity<ItemResponse> createNewItem(@RequestBody RequestItem request) {
 		System.out.println("createNewItem()");
@@ -34,6 +38,14 @@ public class ItemController {
 	public ResponseEntity<ItemResponse> getItemById(@PathVariable("id") Integer id) {
 		System.out.println("getItemById()");
 		return itemService.getItemById(id);
+	}
+
+	@GetMapping("/search")
+	public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Integer id) {
+		System.out.println("getItemByIdBrand()");
+		ResponseEntity<BrandResponse> brand = brandService.getBrandById(id);
+
+		return itemService.getItemByIdBrand(brand.getBody().getResponse());
 	}
 
 	@GetMapping("/all")

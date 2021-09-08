@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.Nullable;
+
 @Table(name = "INVENTORY")
 @Entity
 public class InventoryEntity {
@@ -20,11 +22,18 @@ public class InventoryEntity {
 	@OneToOne
 	@JoinColumn(name = "idItem")
 	private ItemEntity item;
+	@Nullable
 	private Integer stack;
+	@Nullable
 	private Integer inputs;
+	@Nullable
 	private Integer outputs;
+	@Nullable
 	private Integer total;
+	@Nullable
 	private Date updateDate;
+	private String itemTag;
+	private Date createdDate;
 
 	public Integer getIdInventory() {
 		return idInventory;
@@ -82,10 +91,27 @@ public class InventoryEntity {
 		this.updateDate = updateDate;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getItemTag() {
+		return itemTag;
+	}
+
+	public void setItemTag(String itemTag) {
+		this.itemTag = itemTag;
+	}
+
 	@Override
 	public String toString() {
 		return "InventoryEntity [idInventory=" + idInventory + ", item=" + item + ", stack=" + stack + ", inputs="
-				+ inputs + ", outputs=" + outputs + ", total=" + total + ", updateDate=" + updateDate + "]";
+				+ inputs + ", outputs=" + outputs + ", total=" + total + ", updateDate=" + updateDate + ", itemTag="
+				+ itemTag + ", createdDate=" + createdDate + "]";
 	}
 
 }

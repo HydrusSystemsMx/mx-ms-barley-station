@@ -1,6 +1,7 @@
 package com.icn.barleystation.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ public class ItemServiceImpl implements IItemService {
 		ItemResponse response = new ItemResponse();
 		System.out.println("req " + request.toString());
 		try {
+			request.getRequestItem().setStatus(true);
+			request.getRequestItem().setCreatedDate(new Date());
 			repoItem.save(request.getRequestItem());
 			response.setResponse(request.getRequestItem());
 			status = HttpStatus.CREATED;

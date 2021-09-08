@@ -27,11 +27,6 @@ public class ItemEntity {
 	private BrandEntity brand;
 	private Date createdDate;
 
-	public ItemEntity() {
-		this.status = true;
-		this.createdDate = new Date();
-	}
-
 	public Integer getIdItem() {
 		return idItem;
 	}

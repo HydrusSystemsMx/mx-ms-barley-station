@@ -29,9 +29,9 @@ public class InventoryEntity {
 	@Nullable
 	private Integer outputs;
 	@Nullable
-	private Integer total;
+	private Date lastIntDate;
 	@Nullable
-	private Date updateDate;
+	private Date lastOutDate;
 	private String itemTag;
 	private Date createdDate;
 
@@ -75,22 +75,6 @@ public class InventoryEntity {
 		this.outputs = outputs;
 	}
 
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -107,11 +91,21 @@ public class InventoryEntity {
 		this.itemTag = itemTag;
 	}
 
-	@Override
-	public String toString() {
-		return "InventoryEntity [idInventory=" + idInventory + ", item=" + item + ", stack=" + stack + ", inputs="
-				+ inputs + ", outputs=" + outputs + ", total=" + total + ", updateDate=" + updateDate + ", itemTag="
-				+ itemTag + ", createdDate=" + createdDate + "]";
+	public Date getLastIntDate() {
+		return lastIntDate;
 	}
+
+	public void setLastIntDate(Date lastIntDate) {
+		this.lastIntDate = lastIntDate;
+	}
+
+	public Date getLastOutDate() {
+		return lastOutDate;
+	}
+
+	public void setLastOutDate(Date lastOutDate) {
+		this.lastOutDate = lastOutDate;
+	}
+
 
 }

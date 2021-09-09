@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 
 import com.icn.barleystation.entity.BrandEntity;
+import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.entity.ItemEntity;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.model.ItemResponse;
@@ -61,16 +63,29 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public List<ItemResponse> getAllItems() {
+	public List<ItemResponse> getAllItems(List<InventoryEntity> itemsInInventory) {
 		List<ItemResponse> response = new ArrayList<ItemResponse>();
+		List<Integer> idItemsInv = new ArrayList<>();
+
+		for (InventoryEntity i : itemsInInventory) {
+			idItemsInv.add(i.getItem().getIdItem());
+		}
+
 		try {
-			List<ItemEntity> allItems = repoItem.findAll();
+			List<ItemEntity> allItems = repoItem.findAllById(idItemsInv);
 
 			for (ItemEntity list : allItems) {
-				ItemResponse itemResponse = new ItemResponse();
-				itemResponse.setResponse(list);
-				response.add(itemResponse);
+				for (InventoryEntity i : itemsInInventory) {
+					if (list.getIdItem().equals(i.getItem().getIdItem())) {
+						ItemResponse itemResponse = new ItemResponse();
+						itemResponse.setResponse(list);
+						itemResponse.setStack(i.getStack());
+						response.add(itemResponse);
+					}
+
+				}
 			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -88,21 +103,41 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public List<ItemResponse> getItemByIdBrand(BrandEntity brand) {
+	public List<ItemResponse> getItemByIdBrand(BrandEntity brand, List<InventoryEntity> itemsInInventory) {
 		List<ItemResponse> response = new ArrayList<ItemResponse>();
+
 		try {
 			List<ItemEntity> allItems = repoItem.findByBrand(brand);
 
-			for (ItemEntity list : allItems) {
-				ItemResponse itemResponse = new ItemResponse();
-				itemResponse.setResponse(list);
-				response.add(itemResponse);
+			for (int i = 0; i < itemsInInventory.size(); i++) {
+				for (int j = 0; j < allItems.size(); j++) {
+					if (itemsInInventory.get(i).getItem().getIdItem().equals(allItems.get(j).getIdItem())) {
+						ItemResponse obj = new ItemResponse();
+						obj.setResponse(allItems.get(j));
+						obj.setStack(itemsInInventory.get(i).getStack());
+						response.add(obj);
+					}
+
+				}
 			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return response;
 
+	}
+
+	@Override
+	public List<ItemResponse> getAll() {
+		List<ItemResponse> response = new ArrayList<>();
+		List<ItemEntity> jpa = repoItem.findAll();
+		for (ItemEntity i : jpa) {
+			ItemResponse objRes = new ItemResponse();
+			objRes.setResponse(i);
+			response.add(objRes);
+		}
+		return response;
 	}
 
 }

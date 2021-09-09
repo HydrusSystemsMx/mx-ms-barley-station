@@ -94,7 +94,7 @@ public class InventoryServiceImpl implements IInventoryService {
 					stack = i.getStack() + request.getInputs();
 				}
 
-				Integer responseUpdate = inventoryRepo.updateStack(stack, new Date(), idItem);
+				Integer responseUpdate = inventoryRepo.updateStackInp(stack, request.getInputs(), new Date(), idItem);
 
 				if (responseUpdate.equals(1)) {
 					response.setStack(stack);
@@ -125,13 +125,18 @@ public class InventoryServiceImpl implements IInventoryService {
 					stack = i.getStack() - request.getOutputs();
 				}
 
-				Integer responseUpdate = inventoryRepo.updateStack(stack, new Date(), idItem);
+				if (stack >= 0) {
+					Integer responseUpdate = inventoryRepo.updateStackOut(stack, request.getOutputs(), new Date(),
+							idItem);
 
-				if (responseUpdate.equals(1)) {
-					response.setStack(stack);
-					status = HttpStatus.OK;
+					if (responseUpdate.equals(1)) {
+						response.setStack(stack);
+						status = HttpStatus.OK;
+					} else {
+						status = HttpStatus.INTERNAL_SERVER_ERROR;
+					}
 				} else {
-					status = HttpStatus.INTERNAL_SERVER_ERROR;
+					status = HttpStatus.UNPROCESSABLE_ENTITY;
 				}
 			} else {
 				status = HttpStatus.NOT_FOUND;
@@ -141,6 +146,18 @@ public class InventoryServiceImpl implements IInventoryService {
 		}
 
 		return new ResponseEntity<InventoryStack>(response, status);
+	}
+
+	@Override
+	public List<InventoryEntity> getAllFromInventory() {
+		List<InventoryEntity> response = new ArrayList<>();
+		try {
+			response = inventoryRepo.findAll();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return response;
 	}
 
 }

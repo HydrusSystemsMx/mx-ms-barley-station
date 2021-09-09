@@ -1,5 +1,6 @@
 package com.icn.barleystation.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.ItemResponse;
 import com.icn.barleystation.model.RequestItem;
+import com.icn.barleystation.repository.IInventoryRepository;
 import com.icn.barleystation.service.IBrandService;
+import com.icn.barleystation.service.IInventoryService;
 import com.icn.barleystation.service.IItemService;
 
 @RestController
@@ -27,6 +31,9 @@ public class ItemController {
 
 	@Autowired
 	private IBrandService brandService;
+
+	@Autowired
+	private IInventoryService inventoryService;
 
 	@PostMapping("/create")
 	public ResponseEntity<ItemResponse> createNewItem(@RequestBody RequestItem request) {
@@ -43,15 +50,23 @@ public class ItemController {
 	@GetMapping("/search")
 	public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Integer id) {
 		System.out.println("getItemByIdBrand()");
+		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
 		ResponseEntity<BrandResponse> brand = brandService.getBrandById(id);
 
-		return itemService.getItemByIdBrand(brand.getBody().getResponse());
+		return itemService.getItemByIdBrand(brand.getBody().getResponse(), itemsInInventory);
 	}
 
 	@GetMapping("/all")
 	public List<ItemResponse> getAllItems() {
 		System.out.println("getAllItems()");
-		return itemService.getAllItems();
+		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
+		return itemService.getAllItems(itemsInInventory);
+	}
+	
+	@GetMapping("/allOut")
+	public List<ItemResponse> getAll() {
+		System.out.println("getAllItemss()");
+		return itemService.getAll();
 	}
 
 }

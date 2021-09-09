@@ -60,19 +60,19 @@ public class InventoryController {
 	}
 
 	public Boolean validateRequest(StackRequest request, Integer event) {
-		// 1 = iput , 2 == output
-		Boolean validRequest = false;
+		// 1 = iput , 2 == output !
 		if (event == 1) {
-			if (request.getInputs() != null) {
-				return true;
+			if (request.getInputs() == null || request.getInputs().equals(0)) {
+				return false;
 			}
 		} else {
-			if (request.getOutputs() != null) {
-				return true;
+			System.out.println(request.getOutputs().toString());
+			if (request.getOutputs() == null || request.getOutputs().equals(0)) {
+				return false;
 			}
 		}
 
-		return validRequest;
+		return true;
 	}
 
 }

@@ -10,6 +10,7 @@ public class ItemResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<ErrorTO> errors;
 	private ItemEntity response;
+	private Integer stack;
 
 	public ItemEntity getResponse() {
 		return response;
@@ -29,6 +30,14 @@ public class ItemResponse implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getStack() {
+		return stack;
+	}
+
+	public void setStack(Integer stack) {
+		this.stack = stack;
 	}
 
 	@Override

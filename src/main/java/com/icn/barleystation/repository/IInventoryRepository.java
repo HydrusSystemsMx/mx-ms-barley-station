@@ -17,6 +17,8 @@ public interface IInventoryRepository extends JpaRepository<InventoryEntity, Int
 	@Query("select u from InventoryEntity u where u.itemTag = ?1")
 	List<InventoryEntity> findByIdItem(String itemTag);
 
+	InventoryEntity findStackByItemTag(String itemTag);
+
 	@Modifying
 	@Query("update InventoryEntity u set u.stack = ?1, u.inputs =?2, u.lastIntDate =?3 where u.itemTag = ?4")
 	Integer updateStackInp(Integer stack, Integer inputs, Date lastIntDate, String itemTag);

@@ -24,6 +24,8 @@ public class OrderEntity {
 	private Date createdDate;
 	private Date deliveryDate;
 	private Double total;
+	private Integer status;
+	private Integer payMethod;
 
 	public Integer getIdItem() {
 		return idItem;
@@ -103,6 +105,30 @@ public class OrderEntity {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getPayMethod() {
+		return payMethod;
+	}
+
+	public void setPayMethod(Integer payMethod) {
+		this.payMethod = payMethod;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderEntity [idBarleyrequest=" + idBarleyrequest + ", idRequest=" + idRequest + ", idUser=" + idUser
+				+ ", amount=" + amount + ", idItem=" + idItem + ", deliveryLocation=" + deliveryLocation
+				+ ", moneyPrice=" + moneyPrice + ", createdDate=" + createdDate + ", deliveryDate=" + deliveryDate
+				+ ", total=" + total + ", status=" + status + ", payMethod=" + payMethod + "]";
 	}
 
 }

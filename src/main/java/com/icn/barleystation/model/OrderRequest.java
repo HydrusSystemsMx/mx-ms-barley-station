@@ -3,7 +3,6 @@ package com.icn.barleystation.model;
 import java.io.Serializable;
 import java.util.List;
 
-import com.icn.barleystation.entity.ItemEntity;
 import com.icn.barleystation.entity.OrderEntity;
 
 public class OrderRequest implements Serializable {

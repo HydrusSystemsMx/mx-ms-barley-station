@@ -1,6 +1,5 @@
 package com.icn.barleystation.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.ItemResponse;
 import com.icn.barleystation.model.RequestItem;
-import com.icn.barleystation.repository.IInventoryRepository;
 import com.icn.barleystation.service.IBrandService;
 import com.icn.barleystation.service.IInventoryService;
 import com.icn.barleystation.service.IItemService;
@@ -62,7 +60,7 @@ public class ItemController {
 		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
 		return itemService.getAllItems(itemsInInventory);
 	}
-	
+
 	@GetMapping("/allOut")
 	public List<ItemResponse> getAll() {
 		System.out.println("getAllItemss()");

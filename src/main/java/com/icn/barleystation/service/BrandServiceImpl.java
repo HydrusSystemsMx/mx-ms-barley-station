@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.BrandEntity;
-import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.model.BrandRequest;
 import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.ErrorTO;

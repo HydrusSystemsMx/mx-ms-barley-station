@@ -20,7 +20,7 @@ public class OrderEntity {
 	private Integer amount;
 	private Integer idItem;
 	private String deliveryLocation;
-	private Double moneyPrice;
+	private Double price;
 	private Date createdDate;
 	private Date deliveryDate;
 	private Double total;
@@ -57,14 +57,6 @@ public class OrderEntity {
 
 	public void setDeliveryLocation(String deliveryLocation) {
 		this.deliveryLocation = deliveryLocation;
-	}
-
-	public Double getMoneyPrice() {
-		return moneyPrice;
-	}
-
-	public void setMoneyPrice(Double moneyPrice) {
-		this.moneyPrice = moneyPrice;
 	}
 
 	public Integer getIdBarleyrequest() {
@@ -123,11 +115,19 @@ public class OrderEntity {
 		this.payMethod = payMethod;
 	}
 
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderEntity [idBarleyrequest=" + idBarleyrequest + ", idRequest=" + idRequest + ", idUser=" + idUser
 				+ ", amount=" + amount + ", idItem=" + idItem + ", deliveryLocation=" + deliveryLocation
-				+ ", moneyPrice=" + moneyPrice + ", createdDate=" + createdDate + ", deliveryDate=" + deliveryDate
+				+ ", moneyPrice=" + price + ", createdDate=" + createdDate + ", deliveryDate=" + deliveryDate
 				+ ", total=" + total + ", status=" + status + ", payMethod=" + payMethod + "]";
 	}
 

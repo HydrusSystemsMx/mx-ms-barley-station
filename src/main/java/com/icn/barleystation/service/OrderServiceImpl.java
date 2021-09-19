@@ -42,10 +42,11 @@ public class OrderServiceImpl implements IOrderService {
 				order.setIdItem(request.getOrderList().get(i).getIdItem());
 				order.setCreatedDate(new Date());
 				order.setAmount(request.getOrderList().get(i).getAmount());
-				order.setIdUser(request.getOrderList().get(i).getIdUser());
+				order.setIdUser(request.getIdUser());
 				order.setDeliveryLocation(request.getDeliveryLocation());
 				order.setTotal(request.getTotal());
-				order.setMoneyPrice(request.getOrderList().get(i).getMoneyPrice());
+				order.setPayMethod(request.getPayMethod());
+				order.setPrice(request.getOrderList().get(i).getPrice());
 				order.setStatus(0);
 
 				orderRepo.save(order);

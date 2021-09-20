@@ -10,4 +10,6 @@ public interface IOrderService {
 	ResponseEntity<OrderResponse> createNewOrder(OrderRequest request);
 
 	Boolean rollbackRequest(Integer idRequest);
+
+	ResponseEntity<OrderResponse> getOrderRequest(Integer idUser);
 }

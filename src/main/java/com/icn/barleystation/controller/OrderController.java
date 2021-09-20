@@ -3,6 +3,7 @@ package com.icn.barleystation.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,5 +66,11 @@ public class OrderController {
 		System.out.println("rollBackOrder()" + idRequest);
 
 		return orderService.rollbackRequest(idRequest);
+	}
+
+	@GetMapping("/{idUser}")
+	public ResponseEntity<OrderResponse> getBarleyRequest(@PathVariable("idUser") Integer idUser) {
+		System.out.println("getBarleyRequest()" + idUser);
+		return orderService.getOrderRequest(idUser);
 	}
 }

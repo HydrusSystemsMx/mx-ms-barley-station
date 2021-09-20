@@ -94,4 +94,24 @@ public class OrderServiceImpl implements IOrderService {
 		return response;
 	}
 
+	@Override
+	public ResponseEntity<OrderResponse> getOrderRequest(Integer idUser) {
+		OrderResponse response = new OrderResponse();
+		try {
+			List<OrderEntity> order = orderRepo.findByIdUser(idUser,0);
+			if (order != null) {
+				for (OrderEntity e : order) {
+					System.out.println(e.toString());
+				}
+				response.setResponse(order);
+				status = HttpStatus.OK;
+			} else {
+				status = HttpStatus.NOT_FOUND;
+			}
+		} catch (Exception e) {
+			System.out.println("err: " + e.getLocalizedMessage());
+		}
+		return new ResponseEntity<OrderResponse>(response, status);
+	}
+
 }

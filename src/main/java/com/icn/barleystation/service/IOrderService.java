@@ -9,7 +9,7 @@ public interface IOrderService {
 
 	ResponseEntity<OrderResponse> createNewOrder(OrderRequest request);
 
-	Boolean rollbackRequest(Integer idRequest);
+	Boolean rollbackRequest(String idRequest);
 
 	ResponseEntity<OrderResponse> getOrderRequest(Integer idUser);
 }

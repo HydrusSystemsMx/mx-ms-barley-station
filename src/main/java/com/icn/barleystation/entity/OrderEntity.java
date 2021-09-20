@@ -15,7 +15,7 @@ public class OrderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idBarleyrequest;
-	private Integer idRequest;
+	private String idRequest;
 	private Integer idUser;
 	private Integer amount;
 	private Integer idItem;
@@ -67,11 +67,11 @@ public class OrderEntity {
 		this.idBarleyrequest = idBarleyrequest;
 	}
 
-	public Integer getIdRequest() {
+	public String getIdRequest() {
 		return idRequest;
 	}
 
-	public void setIdRequest(Integer idRequest) {
+	public void setIdRequest(String idRequest) {
 		this.idRequest = idRequest;
 	}
 

@@ -10,7 +10,7 @@ public class OrderRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<OrderEntity> orderList;
 	private String deliveryLocation;
-	private Integer idRequest;
+	private String idRequest;
 	private Integer idUser;
 	private Double total;
 	private Integer payMethod;
@@ -31,11 +31,11 @@ public class OrderRequest implements Serializable {
 		this.deliveryLocation = deliveryLocation;
 	}
 
-	public Integer getIdRequest() {
+	public String getIdRequest() {
 		return idRequest;
 	}
 
-	public void setIdRequest(Integer idRequest) {
+	public void setIdRequest(String idRequest) {
 		this.idRequest = idRequest;
 	}
 

@@ -62,7 +62,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/rollback/{idRequest}")
-	public Boolean rollBackOrder(@PathVariable("idRequest") Integer idRequest) {
+	public Boolean rollBackOrder(@PathVariable("idRequest") String idRequest) {
 		System.out.println("rollBackOrder()" + idRequest);
 
 		return orderService.rollbackRequest(idRequest);

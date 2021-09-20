@@ -63,7 +63,7 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	@Transactional
-	public Boolean rollbackRequest(Integer idRequest) {
+	public Boolean rollbackRequest(String idRequest) {
 		System.out.println("rollbackRequest() repo..");
 		Boolean response = false;
 		try {

@@ -12,7 +12,7 @@ import com.icn.barleystation.entity.OrderEntity;
 @Repository
 public interface IOrderRepository extends JpaRepository<OrderEntity, Integer> {
 
-	List<OrderEntity> findAllByIdRequest(Integer idRequest);
+	List<OrderEntity> findAllByIdRequest(String idRequest);
 
 	@Modifying
 	@Query("select u from OrderEntity u where u.idUser = ?1 and u.status = ?2")
@@ -20,6 +20,6 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Integer> {
 
 	@Modifying
 	@Query("update OrderEntity u set u.status = ?2 where u.idRequest = ?1")
-	Integer rollBackStatus(Integer idRequest, Integer status);
+	Integer rollBackStatus(String idRequest, Integer status);
 
 }

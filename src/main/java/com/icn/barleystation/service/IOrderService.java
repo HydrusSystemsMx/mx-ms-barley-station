@@ -11,6 +11,5 @@ public interface IOrderService {
 
 	Boolean rollbackRequest(String idRequest);
 
-	ResponseEntity<OrderResponse> getOrderRequest(Integer idUser, Boolean record);
-	
+	ResponseEntity<OrderResponse> getOrderRequest(Integer idUser);
 }

@@ -95,14 +95,11 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public ResponseEntity<OrderResponse> getOrderRequest(Integer idUser, Boolean record) {
+	public ResponseEntity<OrderResponse> getOrderRequest(Integer idUser) {
 		OrderResponse response = new OrderResponse();
 		try {
-
-			List<OrderEntity> order = (record.equals(false)) ? orderRepo.findByIdUser(idUser, 0)
-					: orderRepo.findByIdUser(idUser, 2);
-			
-			if (order.size() > 0) {
+			List<OrderEntity> order = orderRepo.findByIdUser(idUser,0);
+			if (order != null) {
 				for (OrderEntity e : order) {
 					System.out.println(e.toString());
 				}

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
@@ -72,12 +71,6 @@ public class OrderController {
 	@GetMapping("/{idUser}")
 	public ResponseEntity<OrderResponse> getBarleyRequest(@PathVariable("idUser") Integer idUser) {
 		System.out.println("getBarleyRequest()" + idUser);
-		return orderService.getOrderRequest(idUser, false);
-	}
-	
-	@GetMapping("/history/{idUser}")
-	public ResponseEntity<OrderResponse> getBarleyRequestHistory(@PathVariable("idUser") Integer idUser, @RequestParam("record") Boolean record) {
-		System.out.println("getBarleyRequestHistory()" + idUser);
-		return orderService.getOrderRequest(idUser, true);
+		return orderService.getOrderRequest(idUser);
 	}
 }

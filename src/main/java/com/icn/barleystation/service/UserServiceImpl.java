@@ -46,6 +46,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public ResponseEntity<UserResponse> getUserById(Integer idUser) {
+		System.out.println("DSFNSJKAD");
 		UserResponse response = new UserResponse();
 		try {
 			Optional<UserEntity> optional = repoUsers.findById(idUser);

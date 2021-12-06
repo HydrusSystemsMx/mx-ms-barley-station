@@ -7,7 +7,7 @@ import com.icn.barleystation.entity.BrandEntity;
 public class BrandRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private BrandEntity requestBrand;
+	public BrandEntity requestBrand;
 
 	public BrandEntity getRequestBrand() {
 		return requestBrand;

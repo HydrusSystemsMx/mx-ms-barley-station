@@ -75,7 +75,7 @@ public class ItemServiceImpl implements IItemService {
 
 			for (ItemEntity list : allItems) {
 				for (InventoryEntity i : itemsInInventory) {
-					if (list.getIdItem().equals(i.getItem().getIdItem())) {
+					if (list.getIdItem().equals(i.getItem().getIdItem()) && i.getStack() > 0) {
 						ItemResponse itemResponse = new ItemResponse();
 						itemResponse.setResponse(list);
 						itemResponse.setStack(i.getStack());
@@ -110,7 +110,8 @@ public class ItemServiceImpl implements IItemService {
 
 			for (int i = 0; i < itemsInInventory.size(); i++) {
 				for (int j = 0; j < allItems.size(); j++) {
-					if (itemsInInventory.get(i).getItem().getIdItem().equals(allItems.get(j).getIdItem())) {
+					if (itemsInInventory.get(i).getItem().getIdItem().equals(allItems.get(j).getIdItem())
+							&& itemsInInventory.get(i).getStack() > 0) {
 						ItemResponse obj = new ItemResponse();
 						obj.setResponse(allItems.get(j));
 						obj.setStack(itemsInInventory.get(i).getStack());

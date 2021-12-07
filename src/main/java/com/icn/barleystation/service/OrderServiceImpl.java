@@ -31,7 +31,6 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	public ResponseEntity<OrderResponse> createNewOrder(OrderRequest request) {
-		System.out.println("entraa");
 		OrderResponse response = new OrderResponse();
 		List<OrderEntity> responseList = new ArrayList<>();
 
@@ -64,14 +63,17 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	@Transactional
 	public Boolean rollbackRequest(String idRequest) {
-		System.out.println("rollbackRequest() repo..");
+		System.out.println("rollbackRequest()");
 		Boolean response = false;
 		try {
 			List<OrderEntity> request = orderRepo.findAllByIdRequest(idRequest);
-			System.out.println(request);
+			
+			System.out.println("**** " + request.toString());
+			
 			for (OrderEntity o : request) {
+				System.out.println("Item: " + o.getIdItem().toString() );
 				InventoryEntity stack = invRepo.findStackByItemTag(o.getIdItem().toString());
-
+				System.out.println(" Stack: " + stack.getStack());
 				Integer rollbackStack = stack.getStack() + o.getAmount();
 				System.out.println("stack " + rollbackStack);
 				Integer responseUpdate = invRepo.updateStackInp(rollbackStack, o.getAmount(), new Date(),
@@ -81,7 +83,7 @@ public class OrderServiceImpl implements IOrderService {
 				} else {
 					status = HttpStatus.INTERNAL_SERVER_ERROR;
 				}
-			}
+			} 
 			Integer rollBackedStatus = orderRepo.rollBackStatus(idRequest, 3);
 			System.out.println("rollBackedStatus " + rollBackedStatus);
 			if (rollBackedStatus > 0) {
@@ -98,7 +100,7 @@ public class OrderServiceImpl implements IOrderService {
 	public ResponseEntity<OrderResponse> getOrderRequest(Integer idUser) {
 		OrderResponse response = new OrderResponse();
 		try {
-			List<OrderEntity> order = orderRepo.findByIdUser(idUser,0);
+			List<OrderEntity> order = orderRepo.findByIdUser(idUser, 0);
 			if (order != null) {
 				for (OrderEntity e : order) {
 					System.out.println(e.toString());

@@ -33,14 +33,11 @@ public class OrderController {
 	@PostMapping("/create")
 	public ResponseEntity<OrderResponse> createNewOrder(@RequestBody OrderRequest request) {
 		OrderResponse fullResponse = new OrderResponse();
-		System.out.println("createNewOrder()");
 
 		ResponseEntity<OrderResponse> responseOEntity = orderService.createNewOrder(request);
 
 		if (responseOEntity.getBody().getErrors() == null) {
-			System.out.println("Success");
 			for (int i = 0; i < request.getOrderList().size(); i++) {
-				System.out.println("stack upd");
 				StackRequest stackOut = new StackRequest();
 				stackOut.setOutputs(request.getOrderList().get(i).getAmount());
 				ResponseEntity<InventoryStack> uptOut = inventoryService.generateOutput(stackOut,
@@ -63,14 +60,11 @@ public class OrderController {
 
 	@PostMapping("/rollback/{idRequest}")
 	public Boolean rollBackOrder(@PathVariable("idRequest") String idRequest) {
-		System.out.println("rollBackOrder()" + idRequest);
-
 		return orderService.rollbackRequest(idRequest);
 	}
 
 	@GetMapping("/{idUser}")
 	public ResponseEntity<OrderResponse> getBarleyRequest(@PathVariable("idUser") Integer idUser) {
-		System.out.println("getBarleyRequest()" + idUser);
 		return orderService.getOrderRequest(idUser);
 	}
 }

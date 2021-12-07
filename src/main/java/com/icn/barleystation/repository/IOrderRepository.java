@@ -21,5 +21,9 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Integer> {
 	@Modifying
 	@Query("update OrderEntity u set u.status = ?2 where u.idRequest = ?1")
 	Integer rollBackStatus(String idRequest, Integer status);
+	
+	@Modifying
+	@Query("select u from OrderEntity u where u.status = ?1")
+	List<OrderEntity> findByOrderAtend(Integer status);
 
 }

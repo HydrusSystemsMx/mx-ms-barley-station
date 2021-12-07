@@ -67,11 +67,11 @@ public class OrderServiceImpl implements IOrderService {
 		Boolean response = false;
 		try {
 			List<OrderEntity> request = orderRepo.findAllByIdRequest(idRequest);
-			
+
 			System.out.println("**** " + request.toString());
-			
+
 			for (OrderEntity o : request) {
-				System.out.println("Item: " + o.getIdItem().toString() );
+				System.out.println("Item: " + o.getIdItem().toString());
 				InventoryEntity stack = invRepo.findStackByItemTag(o.getIdItem().toString());
 				System.out.println(" Stack: " + stack.getStack());
 				Integer rollbackStack = stack.getStack() + o.getAmount();
@@ -83,7 +83,7 @@ public class OrderServiceImpl implements IOrderService {
 				} else {
 					status = HttpStatus.INTERNAL_SERVER_ERROR;
 				}
-			} 
+			}
 			Integer rollBackedStatus = orderRepo.rollBackStatus(idRequest, 3);
 			System.out.println("rollBackedStatus " + rollBackedStatus);
 			if (rollBackedStatus > 0) {
@@ -114,6 +114,20 @@ public class OrderServiceImpl implements IOrderService {
 			System.out.println("err: " + e.getLocalizedMessage());
 		}
 		return new ResponseEntity<OrderResponse>(response, status);
+	}
+
+	@Override
+	public List<OrderEntity> getCurrentOrders() {
+		List<OrderEntity> responseList = new ArrayList<>();
+		try {
+			List<OrderEntity> order = orderRepo.findByOrderAtend(0);
+			for (OrderEntity ent : order) {
+				responseList.add(ent);
+			}
+		} catch (Exception e) {
+			System.out.println("err: " + e.getLocalizedMessage());
+		}
+		return responseList;
 	}
 
 }

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.BannerEntity;
-import com.icn.barleystation.entity.OrderEntity;
 import com.icn.barleystation.model.BannerRequest;
 import com.icn.barleystation.model.BannerResponse;
 import com.icn.barleystation.model.ErrorTO;

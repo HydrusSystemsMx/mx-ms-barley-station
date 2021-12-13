@@ -12,10 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.DeliveryEntity;
+import com.icn.barleystation.entity.OrderEntity;
 import com.icn.barleystation.model.DeliveryRequest;
 import com.icn.barleystation.model.DeliveryResponse;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.repository.IDeliveryRpository;
+import com.icn.barleystation.repository.IOrderRepository;
 
 @Service
 public class DeliveryServiceImpl implements IDeliveryService {
@@ -24,6 +26,9 @@ public class DeliveryServiceImpl implements IDeliveryService {
 
 	@Autowired
 	private IDeliveryRpository deliveryRepo;
+
+	@Autowired
+	private IOrderRepository orderRepo;
 
 	@Override
 	@Transactional
@@ -50,6 +55,49 @@ public class DeliveryServiceImpl implements IDeliveryService {
 		listError.add(error);
 
 		return listError;
+	}
+
+	@Override
+	public ResponseEntity<DeliveryResponse> getAllDelivery() {
+		DeliveryResponse response = new DeliveryResponse();
+		List<DeliveryEntity> responseList = new ArrayList<>();
+		try {
+			responseList = deliveryRepo.findAll();
+			status = HttpStatus.OK;
+			response.setResponse(responseList);
+		} catch (Exception e) {
+			response.setErrors(retrieveErrors(e));
+		}
+		return new ResponseEntity<DeliveryResponse>(response, status);
+	}
+
+	@Override
+	public List<DeliveryEntity> getDeliveryAvaliable() {
+		DeliveryResponse response = new DeliveryResponse();
+		List<DeliveryEntity> responseList = new ArrayList<>();
+		try {
+			responseList = deliveryRepo.findDeliveryAvaliable(false);
+			status = HttpStatus.OK;
+			response.setResponse(responseList);
+		} catch (Exception e) {
+			response.setErrors(retrieveErrors(e));
+		}
+		return responseList;
+	}
+
+	@Override
+	@Transactional
+	public void assignToDelivery(DeliveryEntity delivery, List<OrderEntity> orderTaken) {
+		System.out.println("updateInfoDeliveryInOrder()");
+		orderRepo.updateInfoDeliveryInOrder(1, new Date(), delivery.getIdDelivery(), orderTaken.get(0).getIdRequest());
+		System.out.println("changeStatusOrder()");
+		orderRepo.changeStatusOrder(orderTaken.get(0).getIdRequest(), 1);
+		System.out.println("updateDeliveryStatus()");
+		deliveryRepo.updateDeliveryStatus(delivery.getIdDelivery(), true);
+
+		System.out.println("assignToDelivery() Orden: " + orderTaken.get(0).getIdRequest() + " tomada por: "
+				+ delivery.getName() + " " + delivery.getSecondName());
+
 	}
 
 }

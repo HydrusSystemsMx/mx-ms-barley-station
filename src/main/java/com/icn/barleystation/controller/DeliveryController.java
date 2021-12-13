@@ -2,6 +2,7 @@ package com.icn.barleystation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,4 +23,10 @@ public class DeliveryController {
 	public ResponseEntity<DeliveryResponse> addDelivery(@RequestBody DeliveryRequest request) {
 		return deliveryService.addDelivery(request);
 	}
+
+	@GetMapping("/all")
+	public ResponseEntity<DeliveryResponse> getAllDeliverys() {
+		return deliveryService.getAllDelivery();
+	}
+
 }

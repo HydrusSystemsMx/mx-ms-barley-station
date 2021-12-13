@@ -24,6 +24,7 @@ public class DeliveryEntity {
 	private Date createdDate;
 	private Integer branch;
 	private Boolean status;
+	private Boolean avaliable;
 
 	public Integer getIdDelivery() {
 		return idDelivery;
@@ -79,6 +80,21 @@ public class DeliveryEntity {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Boolean getAvaliable() {
+		return avaliable;
+	}
+
+	public void setAvaliable(Boolean avaliable) {
+		this.avaliable = avaliable;
+	}
+
+	@Override
+	public String toString() {
+		return "DeliveryEntity [idDelivery=" + idDelivery + ", name=" + name + ", lastName=" + lastName
+				+ ", SecondName=" + SecondName + ", createdDate=" + createdDate + ", branch=" + branch + ", status="
+				+ status + ", avaliable=" + avaliable + "]";
 	}
 
 }

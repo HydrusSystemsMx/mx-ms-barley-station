@@ -15,6 +15,7 @@ import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.entity.OrderEntity;
 import com.icn.barleystation.model.OrderRequest;
 import com.icn.barleystation.model.OrderResponse;
+import com.icn.barleystation.repository.IDeliveryRpository;
 import com.icn.barleystation.repository.IInventoryRepository;
 import com.icn.barleystation.repository.IOrderRepository;
 
@@ -26,6 +27,9 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Autowired
 	IInventoryRepository invRepo;
+
+	@Autowired
+	IDeliveryRpository deliveryRepo;
 
 	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -47,6 +51,7 @@ public class OrderServiceImpl implements IOrderService {
 				order.setPayMethod(request.getPayMethod());
 				order.setPrice(request.getOrderList().get(i).getPrice());
 				order.setStatus(0);
+				order.setDeliveryStatus(0);
 
 				orderRepo.save(order);
 				responseList.add(order);
@@ -65,9 +70,10 @@ public class OrderServiceImpl implements IOrderService {
 	public Boolean rollbackRequest(String idRequest) {
 		System.out.println("rollbackRequest()");
 		Boolean response = false;
+		Integer idDelivery = null;
 		try {
 			List<OrderEntity> request = orderRepo.findAllByIdRequest(idRequest);
-
+			idDelivery = request.get(0).getIdDelivery();
 			System.out.println("**** " + request.toString());
 
 			for (OrderEntity o : request) {
@@ -84,7 +90,8 @@ public class OrderServiceImpl implements IOrderService {
 					status = HttpStatus.INTERNAL_SERVER_ERROR;
 				}
 			}
-			Integer rollBackedStatus = orderRepo.rollBackStatus(idRequest, 3);
+			Integer rollBackedStatus = orderRepo.changeStatusOrder(idRequest, 3);
+			deliveryRepo.updateDeliveryStatus(idDelivery, false);
 			System.out.println("rollBackedStatus " + rollBackedStatus);
 			if (rollBackedStatus > 0) {
 				response = true;
@@ -98,17 +105,31 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	public ResponseEntity<OrderResponse> getOrderRequest(Integer idUser) {
+		System.out.println("getOrderRequest()");
 		OrderResponse response = new OrderResponse();
+		// PENDIENTE POR REFINAR
 		try {
 			List<OrderEntity> order = orderRepo.findByIdUser(idUser, 0);
-			if (order != null) {
+			if (order.size() > 0) {
+				System.out.println("orderPick2");
 				for (OrderEntity e : order) {
 					System.out.println(e.toString());
 				}
 				response.setResponse(order);
 				status = HttpStatus.OK;
 			} else {
-				status = HttpStatus.NOT_FOUND;
+				System.out.println("orderPick");
+				List<OrderEntity> orderPick = orderRepo.findByIdUser(idUser, 1);
+
+				if (orderPick.size() > 0) {
+					for (OrderEntity e : orderPick) {
+						System.out.println(e.toString());
+					}
+					response.setResponse(orderPick);
+					status = HttpStatus.OK;
+				} else {
+					status = HttpStatus.NOT_FOUND;
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("err: " + e.getLocalizedMessage());

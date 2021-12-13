@@ -14,6 +14,7 @@ public class OrderRequest implements Serializable {
 	private Integer idUser;
 	private Double total;
 	private Integer payMethod;
+	private Integer deliveryStatus;
 
 	public List<OrderEntity> getOrderList() {
 		return orderList;
@@ -62,7 +63,13 @@ public class OrderRequest implements Serializable {
 	public void setPayMethod(Integer payMethod) {
 		this.payMethod = payMethod;
 	}
-	
-	
+
+	public Integer getDeliveryStatus() {
+		return deliveryStatus;
+	}
+
+	public void setDeliveryStatus(Integer deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
 
 }

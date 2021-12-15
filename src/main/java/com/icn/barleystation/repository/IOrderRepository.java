@@ -31,4 +31,10 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Integer> {
 	@Query("update OrderEntity u set u.deliveryStatus = ?1, u.deliveryTakeDate = ?2, u.idDelivery = ?3  where u.idRequest = ?4")
 	Integer updateInfoDeliveryInOrder(Integer status, Date dateTaken, Integer idDelivery, String idRequest);
 
+	List<OrderEntity> findIdRequestByIdDeliveryAndStatus(Integer idDelivery, Integer status);
+
+	@Modifying
+	@Query("update OrderEntity u set u.deliveryStatus = ?1, u.deliveryTakeDate = ?2 where u.idRequest = ?3")
+	Integer updateStatusDelivery(Integer status, Date date, String idRequest);
+
 }

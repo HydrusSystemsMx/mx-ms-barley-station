@@ -25,6 +25,10 @@ public class DeliveryEntity {
 	private Integer branch;
 	private Boolean status;
 	private Boolean avaliable;
+	
+	public String retrieveFullName() {
+		return this.name + " " + this.SecondName + " " + this.lastName;
+	}
 
 	public Integer getIdDelivery() {
 		return idDelivery;

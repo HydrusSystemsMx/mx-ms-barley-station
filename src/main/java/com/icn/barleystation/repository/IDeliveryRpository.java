@@ -20,4 +20,6 @@ public interface IDeliveryRpository extends JpaRepository<DeliveryEntity, Intege
 	@Query("update DeliveryEntity u set u.avaliable = ?2 where u.idDelivery = ?1")
 	Integer updateDeliveryStatus(Integer idDelivery, Boolean avaliable);
 
+	DeliveryEntity findByIdDelivery(Integer idDelivery);
+
 }

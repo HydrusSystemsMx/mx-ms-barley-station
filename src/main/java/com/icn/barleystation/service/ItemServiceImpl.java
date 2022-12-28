@@ -51,9 +51,6 @@ public class ItemServiceImpl implements IItemService {
 			if (optional.isPresent()) {
 				response.setResponse(optional.get());
 				status = HttpStatus.OK;
-			} else if (optional.isEmpty()) {
-				status = HttpStatus.NOT_FOUND;
-				response = null;
 			}
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));

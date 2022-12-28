@@ -1,18 +1,23 @@
 package com.icn.barleystation.service;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.icn.barleystation.mapper.adapter.BannerAdapterMapper;
+import com.icn.barleystation.mapper.adapter.BannerModelMapper;
+import com.icn.barleystation.model.BannerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.BannerEntity;
-import com.icn.barleystation.model.BannerRequest;
 import com.icn.barleystation.model.BannerResponse;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.repository.IBannerRepository;
@@ -22,6 +27,12 @@ public class BannerServiceImpl implements IBannerService {
 
 	@Autowired
 	private IBannerRepository bannerRepo;
+
+	@Autowired
+	private BannerAdapterMapper bannerAdapterMapper;
+
+	@Autowired
+	private BannerModelMapper bannerModelMapper;
 
 	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -35,7 +46,7 @@ public class BannerServiceImpl implements IBannerService {
 			for (BannerEntity res : findAllresponse) {
 				responseList.add(res);
 			}
-			response.setResponse(responseList);
+			response.setResponse(null);
 			status = HttpStatus.OK;
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
@@ -45,18 +56,16 @@ public class BannerServiceImpl implements IBannerService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<BannerResponse> addBanner(BannerRequest banner) {
+	public ResponseEntity<BannerResponse> addBanner(BannerDTO banner) {
 		BannerResponse response = new BannerResponse();
-		List<BannerEntity> responseList = new ArrayList<>();
 		try {
-			BannerEntity request = new BannerEntity();
-			request.setCreatedDate(new Date());
-			request.setStatus(true);
-			request.setUrl(banner.getUrl());
-			bannerRepo.save(request);
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			BannerEntity bannerEntity = bannerAdapterMapper.toEntity(banner);
+			bannerEntity.setFechaCreacion(date);
+			bannerRepo.save(bannerEntity);
 			status = HttpStatus.CREATED;
-			responseList.add(request);
-			response.setResponse(responseList);
+			response.setResponse(bannerAdapterMapper.toDTO(bannerEntity));
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
 		}
@@ -88,7 +97,7 @@ public class BannerServiceImpl implements IBannerService {
 			for (BannerEntity res : findAllresponse) {
 				responseList.add(res);
 			}
-			response.setResponse(responseList);
+			response.setResponse(null);
 			status = HttpStatus.OK;
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));

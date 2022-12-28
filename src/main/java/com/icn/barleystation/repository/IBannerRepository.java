@@ -13,7 +13,7 @@ import com.icn.barleystation.entity.BannerEntity;
 public interface IBannerRepository extends JpaRepository<BannerEntity, Integer> {
 
 	@Modifying
-	@Query("update BannerEntity u set u.status = ?1 where u.idBanner = ?2")
+	@Query("update BannerEntity u set u.status = ?1 where u.id = ?2")
 	Integer cahngeBannerStatus(Boolean status, Integer idBanner);
 	
 	@Modifying

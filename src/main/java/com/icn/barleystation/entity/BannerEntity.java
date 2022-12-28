@@ -1,54 +1,25 @@
 package com.icn.barleystation.entity;
 
-import java.util.Date;
+import com.icn.barleystation.model.Entities;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "BANNER")
-public class BannerEntity {
+public class BannerEntity extends Entities<Long> implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idBanner;
+	@Column(name = "url")
 	private String url;
-	private Date createdDate;
+
+	@Column(name = "status")
 	private Boolean status;
-
-	public Integer getIdBanner() {
-		return idBanner;
-	}
-
-	public void setIdBanner(Integer idBanner) {
-		this.idBanner = idBanner;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
 }

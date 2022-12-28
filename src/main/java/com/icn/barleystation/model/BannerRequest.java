@@ -1,41 +1,27 @@
 package com.icn.barleystation.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class BannerRequest implements Serializable {
+import java.io.Serializable;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class BannerRequest implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private String url;
-	private Date cratedDate;
 
+	@JsonProperty("url")
+	private String url;
+
+	@JsonProperty("status")
 	@Nullable
 	private Boolean status;
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
-	public Date getCratedDate() {
-		return cratedDate;
-	}
-
-	public void setCratedDate(Date cratedDate) {
-		this.cratedDate = cratedDate;
-	}
 
 }

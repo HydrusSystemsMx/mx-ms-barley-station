@@ -8,14 +8,14 @@ import com.icn.barleystation.entity.BannerEntity;
 public class BannerResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public List<BannerEntity> response;
+	public BannerDTO response;
 	private List<ErrorTO> errors;
 
-	public List<BannerEntity> getResponse() {
+	public BannerDTO getResponse() {
 		return response;
 	}
 
-	public void setResponse(List<BannerEntity> response) {
+	public void setResponse(BannerDTO response) {
 		this.response = response;
 	}
 
@@ -26,5 +26,4 @@ public class BannerResponse implements Serializable {
 	public void setErrors(List<ErrorTO> errors) {
 		this.errors = errors;
 	}
-
 }

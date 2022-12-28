@@ -1,5 +1,8 @@
 package com.icn.barleystation.controller;
 
+import com.icn.barleystation.mapper.adapter.BannerModelMapper;
+import com.icn.barleystation.model.BannerDTO;
+import com.icn.barleystation.model.BannerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.icn.barleystation.model.BannerRequest;
 import com.icn.barleystation.model.BannerResponse;
 import com.icn.barleystation.service.IBannerService;
 
 @RestController
 @RequestMapping("/api/v1/barley/banner")
-public class BannerController {
+public class BannerController implements IBannerController{
+
+	@Autowired
+	private BannerModelMapper bannerModelMapper;
 
 	@Autowired
 	private IBannerService bannerService;
@@ -25,20 +30,17 @@ public class BannerController {
 	public ResponseEntity<BannerResponse> getAllBanners() {
 		return bannerService.getAllBanners();
 	}
-	
+
 	@GetMapping("/allActive")
 	public ResponseEntity<BannerResponse> getActiveBanners() {
 		return bannerService.getAllActiveBanners();
 	}
 
-	@PostMapping("/add")
-	public ResponseEntity<BannerResponse> addBanner(@RequestBody BannerRequest banner) {
-		return bannerService.addBanner(banner);
-	}
 
-	@PostMapping("/modify/{idBanner}")
-	public ResponseEntity<BannerResponse> changeStatusBanner(@RequestParam("status") Boolean status,
-			@PathVariable Integer idBanner) {
-		return bannerService.changeStatusBanner(status, idBanner);
+	@Override
+	@PostMapping("/add")
+	public ResponseEntity<BannerResponse> saveContrato(@RequestBody BannerRequest bannerRequest) {
+		System.out.println(bannerRequest);
+		return bannerService.addBanner(bannerModelMapper.requestToBannerDto(bannerRequest));
 	}
 }

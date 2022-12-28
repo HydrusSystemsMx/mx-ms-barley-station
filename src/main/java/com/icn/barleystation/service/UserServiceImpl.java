@@ -53,9 +53,6 @@ public class UserServiceImpl implements IUserService {
 			if (optional.isPresent()) {
 				response.setResponse(optional.get());
 				status = HttpStatus.OK;
-			} else if (optional.isEmpty()) {
-				response.setResponse(null);
-				status = HttpStatus.NOT_FOUND;
 			}
 
 		} catch (Exception e) {

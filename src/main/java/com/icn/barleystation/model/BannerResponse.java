@@ -1,29 +1,28 @@
 package com.icn.barleystation.model;
 
+import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.List;
 
-import com.icn.barleystation.entity.BannerEntity;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BannerResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public BannerDTO response;
+	private String id;
+	private String fechaCreacion;
+	private String ultimaModificacion;
+	private String url;
+	@Nullable
+	private Boolean status;
 	private List<ErrorTO> errors;
 
-	public BannerDTO getResponse() {
-		return response;
-	}
-
-	public void setResponse(BannerDTO response) {
-		this.response = response;
-	}
-
-	public List<ErrorTO> getErrors() {
-		return errors;
-	}
-
-	public void setErrors(List<ErrorTO> errors) {
-		this.errors = errors;
-	}
 }

@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BannerDTO {
 
+	private Integer id;
+	private String fechaCreacion;
+	private String ultimaModificacion;
 	private String url;
 	@Nullable
 	private Boolean status;

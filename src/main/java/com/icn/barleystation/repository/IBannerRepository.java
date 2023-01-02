@@ -17,8 +17,10 @@ public interface IBannerRepository extends JpaRepository<BannerEntity, Integer> 
 	Integer cahngeBannerStatus(Boolean status, Integer idBanner);
 	
 	@Modifying
-	@Query("select u from BannerEntity u where u.status = ?1")
-	List<BannerEntity> findAllActive(Boolean status);
+	@Query("select u from BannerEntity u where u.status = ?1 ORDER BY id DESC")
+	List<BannerEntity> findAllActiveOrderByIdDesc(Boolean status);
 
-	
+	List<BannerEntity> findAllByOrderByIdDesc();
+
+
 }

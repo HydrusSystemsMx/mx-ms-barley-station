@@ -1,17 +1,13 @@
 package com.icn.barleystation.service;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.transaction.Transactional;
 
 import com.icn.barleystation.mapper.adapter.BannerAdapterMapper;
 import com.icn.barleystation.mapper.adapter.BannerModelMapper;
 import com.icn.barleystation.model.BannerDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +19,7 @@ import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.repository.IBannerRepository;
 
 @Service
+@Slf4j
 public class BannerServiceImpl implements IBannerService {
 
 	@Autowired
@@ -38,38 +35,45 @@ public class BannerServiceImpl implements IBannerService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<BannerResponse> getAllBanners() {
+	public List<BannerDTO> getAllBanners() {
 		BannerResponse response = new BannerResponse();
-		List<BannerEntity> responseList = new ArrayList<>();
+		List<BannerDTO> responseList = new ArrayList<>();
 		try {
-			List<BannerEntity> findAllresponse = bannerRepo.findAll();
-			for (BannerEntity res : findAllresponse) {
-				responseList.add(res);
-			}
-			response.setResponse(null);
-			status = HttpStatus.OK;
+			responseList = bannerAdapterMapper.toDTOS(bannerRepo.findAllByOrderByIdDesc());
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
 		}
-		return new ResponseEntity<BannerResponse>(response, status);
+		return responseList;
 	}
 
 	@Override
 	@Transactional
-	public ResponseEntity<BannerResponse> addBanner(BannerDTO banner) {
-		BannerResponse response = new BannerResponse();
+	public void addBanner(BannerDTO banner) {
 		try {
-			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			BannerEntity bannerEntity = bannerAdapterMapper.toEntity(banner);
-			bannerEntity.setFechaCreacion(date);
+			bannerEntity.setFechaCreacion(new Date());
 			bannerRepo.save(bannerEntity);
-			status = HttpStatus.CREATED;
-			response.setResponse(bannerAdapterMapper.toDTO(bannerEntity));
 		} catch (Exception e) {
-			response.setErrors(retrieveErrors(e));
+			log.error(e.getMessage());
+			throw e;
 		}
-		return new ResponseEntity<BannerResponse>(response, status);
+	}
+
+	@Override
+	@Transactional
+	public void actualizarBanner(Integer id, BannerDTO banner) {
+		try {
+			Optional<BannerEntity> bannerEntity = bannerRepo.findById(id);
+
+			if(bannerEntity.isPresent()){
+				bannerEntity.get().setUltimaModificacion(new Date());
+				bannerRepo.save(bannerEntity.get());
+			}
+
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
@@ -84,32 +88,27 @@ public class BannerServiceImpl implements IBannerService {
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
 		}
-		return new ResponseEntity<BannerResponse>(response, status);
+		return new ResponseEntity<>(response, status);
 	}
 
 	@Override
 	@Transactional
-	public ResponseEntity<BannerResponse> getAllActiveBanners() {
+	public List<BannerDTO> getAllActiveBanners() {
 		BannerResponse response = new BannerResponse();
-		List<BannerEntity> responseList = new ArrayList<>();
+		List<BannerDTO> responseList = new ArrayList<>();
 		try {
-			List<BannerEntity> findAllresponse = bannerRepo.findAllActive(true);
-			for (BannerEntity res : findAllresponse) {
-				responseList.add(res);
-			}
-			response.setResponse(null);
-			status = HttpStatus.OK;
+			responseList = bannerAdapterMapper.toDTOS(bannerRepo.findAllActiveOrderByIdDesc(true));
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
 		}
-		return new ResponseEntity<BannerResponse>(response, status);
+		return responseList;
 	}
 
 	public List<ErrorTO> retrieveErrors(Exception e) {
-		System.out.println("Error: " + e.getMessage());
+		log.error(e.getMessage());
 		ErrorTO error = new ErrorTO();
 		error.setMessage(e.getLocalizedMessage());
-		List<ErrorTO> listError = new ArrayList<ErrorTO>();
+		List<ErrorTO> listError = new ArrayList<>();
 		listError.add(error);
 
 		return listError;

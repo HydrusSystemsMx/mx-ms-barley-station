@@ -10,11 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.icn.barleystation.entity.BannerEntity;
 
 @Repository
-public interface IBannerRepository extends JpaRepository<BannerEntity, Integer> {
-
-	@Modifying
-	@Query("update BannerEntity u set u.status = ?1 where u.id = ?2")
-	Integer cahngeBannerStatus(Boolean status, Integer idBanner);
+public interface IBannerRepository extends JpaRepository<BannerEntity, Long> {
 	
 	@Modifying
 	@Query("select u from BannerEntity u where u.status = ?1 ORDER BY id DESC")

@@ -1,7 +1,6 @@
 package com.icn.barleystation.controller;
 
 import com.icn.barleystation.commons.CommonsHelper;
-import com.icn.barleystation.entity.BannerEntity;
 import com.icn.barleystation.mapper.adapter.BannerModelMapper;
 import com.icn.barleystation.model.BannerRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +43,10 @@ public class BannerController implements IBannerController{
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PutMapping("/update/{id}")
-	public ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Integer id, @RequestBody BannerRequest bannerRequest){
+	@PutMapping(value = "/update/{id}")
+	private ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Long id, @RequestBody BannerRequest bannerRequest){
 		log.info(CommonsHelper.INICIO + "[BannerController][saveBanner]");
 		bannerService.actualizarBanner(id, bannerModelMapper.requestToBannerDto(bannerRequest));
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

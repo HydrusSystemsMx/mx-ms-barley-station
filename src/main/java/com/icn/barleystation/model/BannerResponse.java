@@ -1,5 +1,6 @@
 package com.icn.barleystation.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BannerResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;

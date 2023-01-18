@@ -10,7 +10,6 @@ import com.icn.barleystation.model.BannerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.BannerEntity;
@@ -52,6 +51,7 @@ public class BannerServiceImpl implements IBannerService {
 		try {
 			BannerEntity bannerEntity = bannerAdapterMapper.toEntity(banner);
 			bannerEntity.setFechaCreacion(new Date());
+			bannerEntity.setStatus(true);
 			bannerRepo.save(bannerEntity);
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -61,12 +61,14 @@ public class BannerServiceImpl implements IBannerService {
 
 	@Override
 	@Transactional
-	public void actualizarBanner(Integer id, BannerDTO banner) {
+	public void actualizarBanner(Long id, BannerDTO banner) {
 		try {
 			Optional<BannerEntity> bannerEntity = bannerRepo.findById(id);
 
 			if(bannerEntity.isPresent()){
 				bannerEntity.get().setUltimaModificacion(new Date());
+				bannerEntity.get().setUrl(banner.getUrl());
+				bannerEntity.get().setStatus(banner.getStatus());
 				bannerRepo.save(bannerEntity.get());
 			}
 
@@ -74,21 +76,6 @@ public class BannerServiceImpl implements IBannerService {
 			log.error(e.getMessage());
 			throw e;
 		}
-	}
-
-	@Override
-	@Transactional
-	public ResponseEntity<BannerResponse> changeStatusBanner(Boolean statusBanner, Integer idBanner) {
-		BannerResponse response = new BannerResponse();
-		try {
-			Integer res = bannerRepo.cahngeBannerStatus(statusBanner, idBanner);
-			if (res.equals(1)) {
-				status = HttpStatus.OK;
-			}
-		} catch (Exception e) {
-			response.setErrors(retrieveErrors(e));
-		}
-		return new ResponseEntity<>(response, status);
 	}
 
 	@Override

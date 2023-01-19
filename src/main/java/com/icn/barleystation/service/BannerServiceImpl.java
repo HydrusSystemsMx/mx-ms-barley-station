@@ -9,7 +9,6 @@ import com.icn.barleystation.mapper.adapter.BannerModelMapper;
 import com.icn.barleystation.model.BannerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.BannerEntity;
@@ -29,8 +28,6 @@ public class BannerServiceImpl implements IBannerService {
 
 	@Autowired
 	private BannerModelMapper bannerModelMapper;
-
-	private HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
 	@Override
 	@Transactional
@@ -86,13 +83,13 @@ public class BannerServiceImpl implements IBannerService {
 		try {
 			responseList = bannerAdapterMapper.toDTOS(bannerRepo.findAllActiveOrderByIdDesc(true));
 		} catch (Exception e) {
+			log.error(e.getMessage());
 			response.setErrors(retrieveErrors(e));
 		}
 		return responseList;
 	}
 
 	public List<ErrorTO> retrieveErrors(Exception e) {
-		log.error(e.getMessage());
 		ErrorTO error = new ErrorTO();
 		error.setMessage(e.getLocalizedMessage());
 		List<ErrorTO> listError = new ArrayList<>();

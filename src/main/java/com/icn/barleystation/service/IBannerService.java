@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface IBannerService {
 
-	public List<BannerDTO> getAllBanners();
-	public void addBanner(BannerDTO banner);
-	public void actualizarBanner(Long id, BannerDTO banner);
-	public List<BannerDTO> getAllActiveBanners();
+	List<BannerDTO> getAllBanners();
+	void addBanner(BannerDTO banner);
+	void actualizarBanner(Long id, BannerDTO banner);
+	List<BannerDTO> getAllActiveBanners();
 
 
 }

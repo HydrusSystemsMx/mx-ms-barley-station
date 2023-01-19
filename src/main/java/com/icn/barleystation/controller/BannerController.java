@@ -44,7 +44,7 @@ public class BannerController implements IBannerController{
 	}
 
 	@PutMapping(value = "/update/{id}")
-	private ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Long id, @RequestBody BannerRequest bannerRequest){
+	public ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Long id, @RequestBody BannerRequest bannerRequest){
 		log.info(CommonsHelper.INICIO + "[BannerController][saveBanner]");
 		bannerService.actualizarBanner(id, bannerModelMapper.requestToBannerDto(bannerRequest));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

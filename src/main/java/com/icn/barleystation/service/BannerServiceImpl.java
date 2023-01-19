@@ -65,7 +65,7 @@ public class BannerServiceImpl implements IBannerService {
 			if(bannerEntity.isPresent()){
 				bannerEntity.get().setUltimaModificacion(new Date());
 				bannerEntity.get().setUrl(banner.getUrl());
-				bannerEntity.get().setStatus(banner.getStatus());
+				bannerEntity.get().setStatus(banner.isStatus());
 				bannerRepo.save(bannerEntity.get());
 			}
 

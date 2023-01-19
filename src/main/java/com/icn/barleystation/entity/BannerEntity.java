@@ -21,5 +21,5 @@ public class BannerEntity extends Entities<Long> implements Serializable {
 	private String url;
 
 	@Column(name = "status")
-	private Boolean status;
+	private boolean status;
 }

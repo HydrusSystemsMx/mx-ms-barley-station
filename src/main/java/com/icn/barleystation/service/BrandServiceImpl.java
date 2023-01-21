@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.repository.IBrandRepository;
 
+@Slf4j
 @Service
 public class BrandServiceImpl implements IBrandService {
 
@@ -37,14 +39,14 @@ public class BrandServiceImpl implements IBrandService {
 			response.setErrors(retrieveErrors(e));
 		}
 
-		return new ResponseEntity<BrandResponse>(response, status);
+		return new ResponseEntity<>(response, status);
 	}
 
 	public List<ErrorTO> retrieveErrors(Exception e) {
-		System.out.println("Error: " + e.getMessage());
+		log.error(e.getMessage());
 		ErrorTO error = new ErrorTO();
 		error.setMessage(e.getLocalizedMessage());
-		List<ErrorTO> listError = new ArrayList<ErrorTO>();
+		List<ErrorTO> listError = new ArrayList<>();
 		listError.add(error);
 
 		return listError;
@@ -62,12 +64,12 @@ public class BrandServiceImpl implements IBrandService {
 		} catch (Exception e) {
 			response.setErrors(retrieveErrors(e));
 		}
-		return new ResponseEntity<BrandResponse>(response, status);
+		return new ResponseEntity<>(response, status);
 	}
 
 	@Override
 	public List<BrandResponse> getAllBrands() {
-		List<BrandResponse> response = new ArrayList<BrandResponse>();
+		List<BrandResponse> response = new ArrayList<>();
 		try {
 			List<BrandEntity> allItems = brandRepo.findAll();
 
@@ -77,7 +79,7 @@ public class BrandServiceImpl implements IBrandService {
 				response.add(brandResponse);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			log.error(e.getMessage());
 		}
 		return response;
 	}

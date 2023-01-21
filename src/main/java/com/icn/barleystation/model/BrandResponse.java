@@ -1,30 +1,20 @@
 package com.icn.barleystation.model;
 
-import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.icn.barleystation.entity.BrandEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class BrandResponse implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BrandResponse {
 	private List<ErrorTO> errors;
 	private BrandEntity response;
-
-	public List<ErrorTO> getErrors() {
-		return errors;
-	}
-
-	public void setErrors(List<ErrorTO> errors) {
-		this.errors = errors;
-	}
-
-	public BrandEntity getResponse() {
-		return response;
-	}
-
-	public void setResponse(BrandEntity response) {
-		this.response = response;
-	}
-
 }

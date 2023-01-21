@@ -27,26 +27,30 @@ public class BannerController implements IBannerController{
 
 	@GetMapping("/all")
 	public ResponseEntity<List<BannerResponse>> getAllBanners() {
+		log.info(CommonsHelper.INICIO + "[getAllBanners]");
 		return ResponseEntity.ok(bannerModelMapper.bannerDtoToResponse(bannerService.getAllBanners()));
 	}
 
 	@GetMapping("/allActive")
 	public ResponseEntity<List<BannerResponse>> getActiveBanners() {
+		log.info(CommonsHelper.INICIO + "[getActiveBanners]");
 		return ResponseEntity.ok(bannerModelMapper.bannerDtoToResponse(bannerService.getAllActiveBanners()));
 	}
 
 	@Override
 	@PostMapping("/add")
 	public ResponseEntity<HttpStatus> saveBanner(@RequestBody BannerRequest bannerRequest) {
-		log.info(CommonsHelper.INICIO + "[BannerController][saveBanner]");
+		log.info(CommonsHelper.INICIO + "[saveBanner]");
 		bannerService.addBanner(bannerModelMapper.requestToBannerDto(bannerRequest));
+		log.info(CommonsHelper.FIN + "[saveBanner]");
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/update/{id}")
 	public ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Long id, @RequestBody BannerRequest bannerRequest){
-		log.info(CommonsHelper.INICIO + "[BannerController][saveBanner]");
+		log.info(CommonsHelper.INICIO + "[updateBanner]");
 		bannerService.actualizarBanner(id, bannerModelMapper.requestToBannerDto(bannerRequest));
+		log.info(CommonsHelper.FIN + "[updateBanner]");
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

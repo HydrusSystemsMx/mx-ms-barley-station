@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import com.icn.barleystation.model.StackRequest;
 import com.icn.barleystation.repository.IInventoryRepository;
 
 @Service
+@Slf4j
 public class InventoryServiceImpl implements IInventoryService {
 
 	@Autowired
@@ -46,7 +48,7 @@ public class InventoryServiceImpl implements IInventoryService {
 	}
 
 	public List<ErrorTO> retrieveErrors(Exception e) {
-		System.out.println("Error: " + e.getMessage());
+		log.error("Errors : " + e.getMessage());
 		ErrorTO error = new ErrorTO();
 		error.setMessage(e.getLocalizedMessage());
 		List<ErrorTO> listError = new ArrayList<ErrorTO>();

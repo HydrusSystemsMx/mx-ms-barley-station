@@ -1,5 +1,6 @@
 package com.icn.barleystation.model;
 
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,7 @@
 package com.icn.barleystation.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.icn.barleystation.model.errors.ErrorTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

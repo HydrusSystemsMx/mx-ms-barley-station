@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.InventoryEntity;
-import com.icn.barleystation.model.ErrorTO;
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.icn.barleystation.model.InventoryRequest;
 import com.icn.barleystation.model.InventoryResponse;
 import com.icn.barleystation.model.InventoryStack;

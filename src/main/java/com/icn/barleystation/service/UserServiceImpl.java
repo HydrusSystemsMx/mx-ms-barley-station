@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.icn.barleystation.entity.ProfileEntity;
 import com.icn.barleystation.entity.UserEntity;
-import com.icn.barleystation.model.ErrorTO;
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.icn.barleystation.model.UserRequest;
 import com.icn.barleystation.model.UserResponse;
 import com.icn.barleystation.repository.IUserRepository;

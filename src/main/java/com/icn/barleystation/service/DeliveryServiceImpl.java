@@ -16,8 +16,7 @@ import com.icn.barleystation.entity.OrderEntity;
 import com.icn.barleystation.model.DeliveryOrderStatus;
 import com.icn.barleystation.model.DeliveryRequest;
 import com.icn.barleystation.model.DeliveryResponse;
-import com.icn.barleystation.model.ErrorTO;
-import com.icn.barleystation.model.OrderActions;
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.icn.barleystation.repository.IDeliveryRpository;
 import com.icn.barleystation.repository.IOrderRepository;
 

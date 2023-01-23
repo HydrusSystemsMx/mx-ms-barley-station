@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.icn.barleystation.entity.ItemEntity;
+import com.icn.barleystation.model.errors.ErrorTO;
 
 public class ItemResponse implements Serializable {
 

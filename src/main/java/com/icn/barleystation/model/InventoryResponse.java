@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.icn.barleystation.entity.InventoryEntity;
+import com.icn.barleystation.model.errors.ErrorTO;
 
 public class InventoryResponse implements Serializable {
 

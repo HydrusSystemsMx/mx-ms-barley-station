@@ -1,4 +1,4 @@
-package com.icn.barleystation.model;
+package com.icn.barleystation.model.errors;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,5 +1,7 @@
 package com.icn.barleystation.model;
 
+import com.icn.barleystation.model.errors.ErrorTO;
+
 import java.io.Serializable;
 import java.util.List;
 

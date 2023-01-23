@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

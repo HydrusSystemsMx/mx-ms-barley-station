@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.icn.barleystation.entity.UserEntity;
+import com.icn.barleystation.model.errors.ErrorTO;
 
 public class UserResponse implements Serializable {
 

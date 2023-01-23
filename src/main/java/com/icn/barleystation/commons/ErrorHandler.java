@@ -1,6 +1,6 @@
 package com.icn.barleystation.commons;
 
-import com.icn.barleystation.model.ErrorTO;
+import com.icn.barleystation.model.errors.ErrorTO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

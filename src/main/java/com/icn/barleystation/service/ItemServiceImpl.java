@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.icn.barleystation.entity.BrandEntity;
 import com.icn.barleystation.entity.InventoryEntity;
 import com.icn.barleystation.entity.ItemEntity;
-import com.icn.barleystation.model.ErrorTO;
+import com.icn.barleystation.model.errors.ErrorTO;
 import com.icn.barleystation.model.ItemResponse;
 import com.icn.barleystation.model.RequestItem;
 import com.icn.barleystation.repository.IItemRepository;

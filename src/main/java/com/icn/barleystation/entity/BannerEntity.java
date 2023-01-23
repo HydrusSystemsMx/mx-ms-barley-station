@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +20,5 @@ public class BannerEntity extends Entities<Long> implements Serializable {
 
 	@Column(name = "status")
 	private boolean status;
+
 }

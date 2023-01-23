@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -13,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class BannerDTO {
 
 	private Long id;
-	private String fechaCreacion;
-	private String ultimaModificacion;
+	private Date fechaCreacion;
+	private Date ultimaModificacion;
 	private String url;
 	@Nullable
 	private boolean status;

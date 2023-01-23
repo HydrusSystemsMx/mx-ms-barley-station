@@ -22,29 +22,29 @@ public class BannerController implements IBannerController{
 	private final BannerHandler bannerHandler;
 	@GetMapping("/all")
 	public ResponseEntity<List<BannerResponse>> getAllBanners() {
-		log.info(CommonsHelper.INICIO + "[getAllBanners]");
+		log.info(CommonsHelper.START + "[getAllBanners]");
 		return ResponseEntity.ok(bannerHandler.getAllBanners());
 	}
 
 	@GetMapping("/allActive")
 	public ResponseEntity<List<BannerResponse>> getActiveBanners() {
-		log.info(CommonsHelper.INICIO + "[getActiveBanners]");
+		log.info(CommonsHelper.START + "[getActiveBanners]");
 		return ResponseEntity.ok(bannerHandler.getAllActiveBanners());
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<HttpStatus> saveBanner(@RequestBody BannerRequest bannerRequest) {
-		log.info(CommonsHelper.INICIO + "[saveBanner]");
+		log.info(CommonsHelper.START + "[saveBanner]");
 		bannerHandler.addBanner(bannerRequest);
-		log.info(CommonsHelper.FIN + "[saveBanner]");
+		log.info(CommonsHelper.END + "[saveBanner]");
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/update/{id}")
 	public ResponseEntity<HttpStatus> updateBanner(@PathVariable("id") Long bannerId, @RequestBody BannerRequest bannerRequest){
-		log.info(CommonsHelper.INICIO + "[updateBanner]");
+		log.info(CommonsHelper.START + "[updateBanner]");
 		bannerHandler.updateBanner(bannerId, bannerRequest);
-		log.info(CommonsHelper.FIN + "[updateBanner]");
+		log.info(CommonsHelper.END + "[updateBanner]");
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

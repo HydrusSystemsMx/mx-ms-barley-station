@@ -5,7 +5,6 @@ import com.icn.barleystation.mapper.adapter.BannerAdapterMapper;
 import com.icn.barleystation.mapper.adapter.BannerModelMapper;
 import com.icn.barleystation.model.BannerDTO;
 import com.icn.barleystation.model.BannerResponse;
-import com.icn.barleystation.model.ErrorTO;
 import com.icn.barleystation.repository.IBannerJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static com.icn.barleystation.commons.ErrorHandler.retrieveErrors;
 
 
 @Slf4j
@@ -76,13 +77,5 @@ public class BannerDaoImpl implements BannerDao{
         return Objects.nonNull(bannerEntity);
     }
 
-    public List<ErrorTO> retrieveErrors(Exception e) {
-        ErrorTO error = new ErrorTO();
-        error.setMessage(e.getLocalizedMessage());
-        List<ErrorTO> listError = new ArrayList<>();
-        listError.add(error);
-
-        return listError;
-    }
 
 }

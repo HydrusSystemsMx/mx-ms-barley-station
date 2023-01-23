@@ -18,8 +18,8 @@ import java.util.List;
 public class BannerResponse {
 
 	private Long id;
-	private String fechaCreacion;
-	private String ultimaModificacion;
+	private String createDate;
+	private String updateDate;
 	private String url;
 	@Nullable
 	private boolean status;

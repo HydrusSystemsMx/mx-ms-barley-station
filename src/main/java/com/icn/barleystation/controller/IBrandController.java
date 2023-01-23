@@ -30,7 +30,7 @@ public interface IBrandController {
             @ApiResponse(code = 401, response = Exception.class, message = "Unauthorized"),
             @ApiResponse(code = 500, response = Exception.class, message = "Internal server error")
     })
-    ResponseEntity<BrandResponse> createNewBrand(@RequestBody BrandRequest bannerRequest);
+    void createNewBrand(@RequestBody BrandRequest bannerRequest);
 
     @ApiOperation("Get a brand")
     @ApiResponses({
@@ -39,6 +39,6 @@ public interface IBrandController {
             @ApiResponse(code = 401, response = Exception.class, message = "Unauthorized"),
             @ApiResponse(code = 500, response = Exception.class, message = "Internal server error")
     })
-    ResponseEntity<BrandResponse> getBrandyId(@PathVariable("id") Integer id);
+    ResponseEntity<BrandResponse> getBrandyId(@PathVariable("id") Long id);
 
 }

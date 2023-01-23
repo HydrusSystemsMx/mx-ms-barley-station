@@ -1,22 +1,20 @@
 package com.icn.barleystation.model;
 
-import java.util.Date;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class BrandResponse {
-	private Long id;
+public class BrandDTO {
+ 	private Integer id;
 	private String brandName;
 	@Nullable
 	private boolean status;
@@ -25,4 +23,5 @@ public class BrandResponse {
 	private Date createDate;
 	private Date updateDate;
 	private List<ErrorTO> errors;
+
 }

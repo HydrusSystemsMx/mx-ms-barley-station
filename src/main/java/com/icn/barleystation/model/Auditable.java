@@ -17,12 +17,12 @@ import java.util.Date;
 public abstract class Auditable implements Serializable {
 
     @CreatedDate
-    @Column(name = "fecha_de_creacion", updatable = false)
+    @Column(name = "create_date", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date fechaCreacion;
+    protected Date createDate;
 
     @LastModifiedDate
-    @Column(name = "fecha_ultima_modificacion")
+    @Column(name = "updateDate")
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date ultimaModificacion;
+    protected Date updateDate;
 }

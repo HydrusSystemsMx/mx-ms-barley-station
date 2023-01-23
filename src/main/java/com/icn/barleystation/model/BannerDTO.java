@@ -15,8 +15,8 @@ import java.util.Date;
 public class BannerDTO {
 
 	private Long id;
-	private Date fechaCreacion;
-	private Date ultimaModificacion;
+	private Date createDate;
+	private Date updateDate;
 	private String url;
 	@Nullable
 	private boolean status;

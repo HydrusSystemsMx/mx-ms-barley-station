@@ -2,6 +2,7 @@ package com.icn.barleystation.controller;
 
 import java.util.List;
 
+import com.icn.barleystation.dao.BrandDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,7 @@ public class ItemController {
 
 	@Autowired
 	private IItemService itemService;
-
-	@Autowired
-	private IBrandService brandService;
+	private BrandDao brandDao;
 
 	@Autowired
 	private IInventoryService inventoryService;
@@ -46,12 +45,12 @@ public class ItemController {
 	}
 
 	@GetMapping("/search")
-	public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Integer id) {
+	public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Long id) {
 		System.out.println("getItemByIdBrand()");
 		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
-		ResponseEntity<BrandResponse> brand = brandService.getBrandById(id);
+		BrandResponse brand = brandDao.getBrandById(id);
 
-		return itemService.getItemByIdBrand(brand.getBody().getResponse(), itemsInInventory);
+		return itemService.getItemByIdBrand(null, itemsInInventory);
 	}
 
 	@GetMapping("/all")

@@ -1,67 +1,28 @@
 package com.icn.barleystation.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.icn.barleystation.model.Entities;
 import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "BRAND")
 @Entity
-public class BrandEntity {
+public class BrandEntity extends Entities<Long> implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idBrand;
+	@Column(name = "brand_name")
 	private String brandName;
-	@Nullable
-	private Boolean status;
-	@Nullable
+	@Column(name = "status")
+	private boolean status;
+	@Column(name = "image")
 	private String image;
-	private Date createdDate;
-
-	public Integer getIdBrand() {
-		return idBrand;
-	}
-
-	public void setIdBrand(Integer idBrand) {
-		this.idBrand = idBrand;
-	}
-
-	public String getBrandName() {
-		return brandName;
-	}
-
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
 
 }

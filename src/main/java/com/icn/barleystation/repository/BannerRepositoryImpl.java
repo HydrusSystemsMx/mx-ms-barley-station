@@ -4,17 +4,12 @@ import com.icn.barleystation.entity.BannerEntity;
 import com.icn.barleystation.mapper.adapter.BannerAdapterMapper;
 import com.icn.barleystation.mapper.adapter.BannerModelMapper;
 import com.icn.barleystation.model.BannerDTO;
-import com.icn.barleystation.model.BannerResponse;
-import com.icn.barleystation.model.ErrorTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -67,12 +62,4 @@ public class BannerRepositoryImpl implements BannerRepository{
         log.info(FIN);
 	}
 
-	public List<ErrorTO> retrieveErrors(Exception e) {
-		ErrorTO error = new ErrorTO();
-		error.setMessage(e.getLocalizedMessage());
-		List<ErrorTO> listError = new ArrayList<>();
-		listError.add(error);
-
-		return listError;
-	}
 }

@@ -17,7 +17,6 @@ import java.util.List;
 @Component
 public class BannerHandler {
     private static final String LOG_INICIO = "[Inicio]";
-    private static final String LOG_FIN = "[Fin]";
     private final BannerDao bannerDao;
     private final BannerService bannerService;
 
@@ -25,18 +24,22 @@ public class BannerHandler {
     private BannerModelMapper bannerModelMapper;
 
     public List<BannerResponse> getAllBanners(){
+        log.info(LOG_INICIO);
         return bannerModelMapper.bannerDtoToResponse(bannerDao.getAllBanners());
     }
 
     public List<BannerResponse> getAllActiveBanners(){
+        log.info(LOG_INICIO);
         return bannerModelMapper.bannerDtoToResponse(bannerDao.getAllActiveBanners());
     }
 
     public void addBanner(BannerRequest bannerRequest){
+        log.info(LOG_INICIO);
         bannerService.createNewBanner(bannerModelMapper.requestToBannerDto(bannerRequest));
     }
 
     public void updateBanner(Long bannerId, BannerRequest bannerRequest){
+        log.info(LOG_INICIO);
         bannerService.updateBanner(bannerId, bannerModelMapper.requestToBannerDto(bannerRequest));
     }
 

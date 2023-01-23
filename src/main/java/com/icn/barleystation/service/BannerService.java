@@ -18,16 +18,12 @@ public class BannerService {
     public void createNewBanner(BannerDTO bannerDTO){
         if(!bannerDao.getBannerByUrl(bannerDTO.getUrl())){
             bannerRepository.addBanner(bannerDTO);
-        } else{
-            log.info("Ya eciste el banner");
         }
     }
 
     public void updateBanner(Long bannerId, BannerDTO bannerDTO){
         if(bannerDao.getBannerById(bannerId)){
             bannerRepository.updateBanner(bannerId, bannerDTO);
-        } else{
-            log.info("No eciste el banner");
         }
     }
 

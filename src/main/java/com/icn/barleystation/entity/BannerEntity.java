@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Data
-@SuppressWarnings("all")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

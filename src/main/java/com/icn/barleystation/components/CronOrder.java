@@ -23,7 +23,7 @@ public class CronOrder {
 	@Autowired
 	IDeliveryService deliveryService;
 
-	@Scheduled(fixedRate = 30000)
+	@Scheduled(fixedRate = 3000000)
 	public void fixedRateSch() {
 
 		List<OrderEntity> orderTaken = new ArrayList<>();

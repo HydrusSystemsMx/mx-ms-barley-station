@@ -1,72 +1,52 @@
 package com.icn.barleystation.controller;
 
-import java.util.List;
-
-import com.icn.barleystation.dao.BrandDao;
-import com.icn.barleystation.entity.BrandEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.icn.barleystation.entity.InventoryEntity;
-import com.icn.barleystation.model.BrandResponse;
+import com.icn.barleystation.handler.ItemHandler;
 import com.icn.barleystation.model.ItemResponse;
 import com.icn.barleystation.model.RequestItem;
-import com.icn.barleystation.service.IBrandService;
-import com.icn.barleystation.service.IInventoryService;
-import com.icn.barleystation.service.IItemService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
+@RestControllerAdvice
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/barley/items")
 public class ItemController {
 
-	@Autowired
-	private IItemService itemService;
-	private BrandDao brandDao;
+    private final ItemHandler itemHandler;
 
-	@Autowired
-	private IInventoryService inventoryService;
+    @PostMapping("/create")
+    public void createNewItem(@RequestBody RequestItem request) {
+        log.info("createNewItem()");
+        itemHandler.createNewItem(request);
+    }
 
-	@PostMapping("/create")
-	public ResponseEntity<ItemResponse> createNewItem(@RequestBody RequestItem request) {
-		System.out.println("createNewItem()");
-		return itemService.createNewItem(request);
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<ItemResponse> getItemById(@PathVariable("id") Long id) {
+        log.info("getItemById()");
+        return new ResponseEntity<>(itemHandler.getItemById(id), HttpStatus.OK);
+    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<ItemResponse> getItemById(@PathVariable("id") Integer id) {
-		System.out.println("getItemById()");
-		return itemService.getItemById(id);
-	}
+    @GetMapping("/search")
+    public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Long id) {
+        return itemHandler.getItemByIdBrand(id);
+    }
 
-	@GetMapping("/search")
-	public List<ItemResponse> getItemByIdBrand(@RequestParam("idBrand") Long id) {
-		System.out.println("getItemByIdBrand()");
-		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
+    @GetMapping("/all")
+    public List<ItemResponse> getAllItems() {
+        log.info("getAllItems()");
+        return itemHandler.getAllItems();
+    }
 
-		BrandEntity brandEntity = new BrandEntity();
-		brandEntity.setId(id);
-
-		return itemService.getItemByIdBrand(brandEntity, itemsInInventory);
-	}
-
-	@GetMapping("/all")
-	public List<ItemResponse> getAllItems() {
-		System.out.println("getAllItems()");
-		List<InventoryEntity> itemsInInventory = inventoryService.getAllFromInventory();
-		return itemService.getAllItems(itemsInInventory);
-	}
-
-	@GetMapping("/allOut")
-	public List<ItemResponse> getAll() {
-		System.out.println("getAllItemss()");
-		return itemService.getAll();
-	}
+    @GetMapping("/allOut")
+    public List<ItemResponse> getAll() {
+        log.info("getAllItemss()");
+        return itemHandler.getAll();
+    }
 
 }

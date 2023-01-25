@@ -1,7 +1,9 @@
 package com.icn.barleystation.dao;
 
 import com.icn.barleystation.commons.CommonsHelper;
+import com.icn.barleystation.mapper.adapter.BrandAdapterMapper;
 import com.icn.barleystation.mapper.adapter.BrandModelMapper;
+import com.icn.barleystation.model.BrandDTO;
 import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.model.errors.BarleyException;
 import com.icn.barleystation.repository.IBrandJpaRepository;
@@ -25,9 +27,12 @@ public class BrandDaoImpl implements BrandDao {
     @Autowired
     private final BrandModelMapper brandModelMapper;
 
+    @Autowired
+    private final BrandAdapterMapper brandAdapterMapper;
+
     @Override
-    public BrandResponse getBrandById(Long id) {
-        return brandRepo.findById(id).map(brandModelMapper::brandEntityToResponse).orElseThrow(()-> new BarleyException(CommonsHelper.ENTITY_NOT_FOUND_MSG, CommonsHelper.ENTITY_NOT_FOUND_CODE));
+    public BrandDTO getBrandById(Long id) {
+        return brandRepo.findById(id).map(brandAdapterMapper::toDTO).orElseThrow(()-> new BarleyException(CommonsHelper.ENTITY_NOT_FOUND_MSG, CommonsHelper.ENTITY_NOT_FOUND_CODE));
     }
 
     @Override

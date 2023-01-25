@@ -1,16 +1,18 @@
 package com.icn.barleystation.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestItem {
-    private Integer id;
+public class ItemDTO {
+    private Long id;
     private String nameItem;
     private Double price;
     private String image;
@@ -18,6 +20,6 @@ public class RequestItem {
     private boolean status;
     private Date createDate;
     private Date updateDate;
-    private Long idBrand;
+    private BrandDTO brand;
 
 }

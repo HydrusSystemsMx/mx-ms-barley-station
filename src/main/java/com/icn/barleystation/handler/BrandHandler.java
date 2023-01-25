@@ -7,7 +7,6 @@ import com.icn.barleystation.model.BrandResponse;
 import com.icn.barleystation.service.BrandService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,14 +17,14 @@ import java.util.List;
 public class BrandHandler {
     private final BrandDao brandDao;
     private final BrandService brandService;
-    @Autowired
-    private BrandModelMapper brandModelMapper;
+    private final BrandModelMapper brandModelMapper;
+
     public void createNewBrand(BrandRequest request) {
         brandService.createNewBrand(brandModelMapper.requestToBrandDto(request));
     }
 
     public BrandResponse getBrandById(Long id) {
-        return brandDao.getBrandById(id);
+        return brandModelMapper.brandDtoToResponse(brandDao.getBrandById(id));
     }
 
     public List<BrandResponse> getAllBrands() {

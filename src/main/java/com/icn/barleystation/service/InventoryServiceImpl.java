@@ -36,7 +36,7 @@ public class InventoryServiceImpl implements IInventoryService {
 
 		try {
 			System.out.println(request.getInventoryRequest().toString());
-			request.getInventoryRequest().setItemTag(request.getInventoryRequest().getItem().getIdItem().toString());
+			request.getInventoryRequest().setItemTag(request.getInventoryRequest().getItem().getId().toString());
 			request.getInventoryRequest().setCreatedDate(new Date());
 			inventoryRepo.save(request.getInventoryRequest());
 			status = HttpStatus.CREATED;

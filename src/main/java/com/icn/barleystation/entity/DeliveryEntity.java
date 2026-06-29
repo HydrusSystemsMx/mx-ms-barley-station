@@ -2,11 +2,7 @@ package com.icn.barleystation.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.sun.istack.Nullable;
 
@@ -24,7 +20,9 @@ public class DeliveryEntity {
 	private Date createdDate;
 	private Integer branch;
 	private Boolean status;
-	private Boolean avaliable;
+
+	@Column(name = "avaliable")
+	private boolean avaliable;
 	
 	public String retrieveFullName() {
 		return this.name + " " + this.SecondName + " " + this.lastName;

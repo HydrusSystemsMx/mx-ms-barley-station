@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 	public ResponseEntity<UserResponse> createNewUser(UserRequest request) {
 		UserResponse response = new UserResponse();
 		ProfileEntity profile = new ProfileEntity();
-		profile.setIdProfile(3);
+		profile.setIdProfile(request.getRequestUser().getIdUser());
 		
 		try {
 			request.getRequestUser().setStatus(true);
@@ -46,7 +46,6 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public ResponseEntity<UserResponse> getUserById(Integer idUser) {
-		System.out.println("DSFNSJKAD");
 		UserResponse response = new UserResponse();
 		try {
 			Optional<UserEntity> optional = repoUsers.findById(idUser);

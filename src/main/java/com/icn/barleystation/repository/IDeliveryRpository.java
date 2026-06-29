@@ -11,10 +11,6 @@ import com.icn.barleystation.entity.DeliveryEntity;
 
 @Repository
 public interface IDeliveryRpository extends JpaRepository<DeliveryEntity, Integer> {
-
-	@Modifying
-	@Query("select u from DeliveryEntity u where u.avaliable = ?1")
-	List<DeliveryEntity> findDeliveryAvaliable(Boolean avaliable);
 	
 	@Modifying
 	@Query("update DeliveryEntity u set u.avaliable = ?2 where u.idDelivery = ?1")

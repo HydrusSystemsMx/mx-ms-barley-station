@@ -77,7 +77,6 @@ public class DeliveryServiceImpl implements IDeliveryService {
 		DeliveryResponse response = new DeliveryResponse();
 		List<DeliveryEntity> responseList = new ArrayList<>();
 		try {
-			responseList = deliveryRepo.findDeliveryAvaliable(false);
 			status = HttpStatus.OK;
 			response.setResponse(responseList);
 		} catch (Exception e) {

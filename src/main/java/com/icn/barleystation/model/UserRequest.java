@@ -1,29 +1,45 @@
 package com.icn.barleystation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.Nullable;
+
 import java.io.Serializable;
+import java.util.Date;
 
-import com.icn.barleystation.entity.UserEntity;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private UserEntity requestUser;
 
-	public UserEntity getRequestUser() {
-		return requestUser;
-	}
+	@JsonProperty("name")
+	private String name;
 
-	public void setRequestUser(UserEntity requestUser) {
-		this.requestUser = requestUser;
-	}
+	@JsonProperty("status")
+	@Nullable
+	private Boolean status;
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	@JsonProperty("profileImage")
+	private String profileImage;
 
-	@Override
-	public String toString() {
-		return "UserRequest [requestUser=" + requestUser + "]";
-	}
+	@JsonProperty("mail")
+	private String mail;
 
+	@JsonProperty("phone")
+	private String phone;
+
+	@JsonProperty("address")
+	private String address;
+
+	@JsonProperty("createdDate")
+	@JsonIgnore
+	private Date createdDate;
 }

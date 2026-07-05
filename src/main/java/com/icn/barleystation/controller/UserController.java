@@ -1,35 +1,33 @@
 package com.icn.barleystation.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.icn.barleystation.handler.UserHandler;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.icn.barleystation.model.UserRequest;
 import com.icn.barleystation.model.UserResponse;
-import com.icn.barleystation.service.IUserService;
 
+@Slf4j
+@RestControllerAdvice
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/barley/users")
 public class UserController {
 
-	@Autowired
-	private IUserService userService;
+	private final UserHandler userHandler;
 
 	@PostMapping("/create")
-	public ResponseEntity<UserResponse> createNewUser(@RequestBody UserRequest request) {
-		System.out.println("createNewwUser()");
-		return userService.createNewUser(request);
+	public UserResponse createNewUser(@RequestBody UserRequest request) {
+		System.out.println("createNewUser()");
+		return userHandler.createNewUser(request);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Integer id) {
+	public UserResponse getUserById(@PathVariable("id") Long id) {
 		System.out.println("userService()");
-		return userService.getUserById(id);
+		return userHandler.getUserById(id);
 	}
 
 }

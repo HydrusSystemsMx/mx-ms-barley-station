@@ -4,15 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.lang.Nullable;
 
@@ -22,16 +14,16 @@ public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idUser;
+	private Long idUser;
 	private String name;
 	@Nullable
-	private String nickname;
+	private String profileImage;
 	private String mail;
 	private String phone;
-	private String password;
 	private String address;
 	@Nullable
 	private Boolean status;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -45,11 +37,11 @@ public class UserEntity {
 		profile.add(tempProfile);
 	}
 
-	public Integer getIdUser() {
+	public Long getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUser(Integer idUser) {
+	public void setIdUser(Long idUser) {
 		this.idUser = idUser;
 	}
 
@@ -61,12 +53,12 @@ public class UserEntity {
 		this.name = name;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getProfileImage() {
+		return profileImage;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 
 	public String getMail() {
@@ -85,14 +77,6 @@ public class UserEntity {
 		this.phone = phone;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -107,6 +91,11 @@ public class UserEntity {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		createdDate = new Date();
 	}
 
 	public Date getCreatedDate() {
@@ -127,8 +116,8 @@ public class UserEntity {
 
 	@Override
 	public String toString() {
-		return "UserEntity [idUser=" + idUser + ", name=" + name + ", nickname=" + nickname + ", mail=" + mail
-				+ ", phone=" + phone + ", password=" + password + ", address=" + address + ", status=" + status
+		return "UserEntity [idUser=" + idUser + ", name=" + name + ", nickname=" + profileImage + ", mail=" + mail
+				+ ", phone=" + phone + ", address=" + address + ", status=" + status
 				+ ", createdDate=" + createdDate + ", profile=" + profile + "]";
 	}
 

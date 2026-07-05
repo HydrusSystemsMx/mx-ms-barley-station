@@ -1,40 +1,30 @@
 package com.icn.barleystation.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.icn.barleystation.model.errors.ErrorTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 import java.util.List;
 
-import com.icn.barleystation.entity.UserEntity;
-import com.icn.barleystation.model.errors.ErrorTO;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserResponse {
 
-public class UserResponse implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	private UserEntity response;
+	private Long idUser;
+	private String name;
+	private Boolean status;
+	private String profileImage;
+	private String mail;
+	private String phone;
+	private String password;
+	private String address;
+	private Date createdDate;
 	private List<ErrorTO> errors;
-
-	public UserEntity getResponse() {
-		return response;
-	}
-
-	public void setResponse(UserEntity response) {
-		this.response = response;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public List<ErrorTO> getErrors() {
-		return errors;
-	}
-
-	public void setErrors(List<ErrorTO> errors) {
-		this.errors = errors;
-	}
-
-	@Override
-	public String toString() {
-		return "UserResponse [response=" + response + ", errors=" + errors + "]";
-	}
-
 }

@@ -23,6 +23,10 @@ public class UserHandler {
 
     }
 
+    public UserResponse getUserByEmail(String email) {
+        return userModelMapper.userDtoToResponse(userDao.getUserByEmail(email));
+    }
+
     public UserResponse getUserById(Long id) {
         return userModelMapper.userDtoToResponse(userDao.getUserById(id));
     }

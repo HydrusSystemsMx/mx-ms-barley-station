@@ -6,6 +6,8 @@ import com.icn.barleystation.model.UserResponse;
 import java.util.List;
 
 public interface UserDao {
-    UserDTO getUserById(Long id);
+    UserDTO getUserByEmail(String email);
     List<UserResponse> getAllUsers();
+
+    UserDTO getUserById(Long id);
 }

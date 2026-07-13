@@ -34,11 +34,11 @@ public class UserDaoImpl implements UserDao{
     @Autowired
     private UserModelMapper userModelMapper;
     @Override
-    public UserDTO getUserById(Long id) {
+    public UserDTO getUserByEmail(String email) {
         log.info(LOG_INICIO);
         UserDTO response = new UserDTO();
         try {
-            response = userAdapterMapper.toDTO(userRepository.findByIdUser(id));
+            response = userAdapterMapper.toDTO(userRepository.findByMail(email));
         } catch (Exception e) {
             response.setErrors(retrieveErrors(e));
         }
@@ -49,5 +49,18 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<UserResponse> getAllUsers() {
         return null;
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        log.info(LOG_INICIO);
+        UserDTO response = new UserDTO();
+        try {
+            response = userAdapterMapper.toDTO(userRepository.findByIdUser(id));
+        } catch (Exception e) {
+            response.setErrors(retrieveErrors(e));
+        }
+        log.info(LOG_FIN);
+        return response;
     }
 }

@@ -3,7 +3,6 @@ package com.icn.barleystation.controller;
 import com.icn.barleystation.handler.UserHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.icn.barleystation.model.UserRequest;
@@ -24,10 +23,17 @@ public class UserController {
 		return userHandler.createNewUser(request);
 	}
 
+	@GetMapping("/search")
+	public UserResponse getUserByEmail(@RequestParam("email") String email) {
+		log.info("Buscando usuario: {}", email);
+		return userHandler.getUserByEmail(email);
+	}
+
 	@GetMapping("/{id}")
 	public UserResponse getUserById(@PathVariable("id") Long id) {
 		System.out.println("userService()");
 		return userHandler.getUserById(id);
 	}
+
 
 }

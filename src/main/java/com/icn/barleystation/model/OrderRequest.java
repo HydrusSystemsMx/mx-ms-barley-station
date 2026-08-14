@@ -15,6 +15,15 @@ public class OrderRequest implements Serializable {
 	private Double total;
 	private Integer payMethod;
 	private Integer deliveryStatus;
+	private Double exactCash;
+
+	public double getExactCash() {
+		return exactCash;
+	}
+
+	public void setExactCash(double exactCash) {
+		this.exactCash = exactCash;
+	}
 
 	public List<OrderEntity> getOrderList() {
 		return orderList;

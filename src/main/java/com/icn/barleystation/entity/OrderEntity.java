@@ -29,6 +29,7 @@ public class OrderEntity {
 	private Integer payMethod;
 	private Integer deliveryStatus;
 	private Integer idDelivery;
+	private Double exactCash;
 
 	public Integer getIdItem() {
 		return idItem;
@@ -150,12 +151,33 @@ public class OrderEntity {
 		this.deliveryTakeDate = deliveryTakeDate;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderEntity [idBarleyrequest=" + idBarleyrequest + ", idRequest=" + idRequest + ", idUser=" + idUser
-				+ ", amount=" + amount + ", idItem=" + idItem + ", deliveryLocation=" + deliveryLocation + ", price="
-				+ price + ", createdDate=" + createdDate + ", deliveryDate=" + deliveryDate + ", total=" + total
-				+ ", status=" + status + ", payMethod=" + payMethod + ", deliveryStatus=" + deliveryStatus + "]";
+	public Double getExactCash() {
+		return exactCash;
 	}
 
+	public void setExactCash(Double exactCash) {
+		this.exactCash = exactCash;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderEntity{" +
+				"idBarleyrequest=" + idBarleyrequest +
+				", idRequest='" + idRequest + '\'' +
+				", idUser=" + idUser +
+				", amount=" + amount +
+				", idItem=" + idItem +
+				", deliveryLocation='" + deliveryLocation + '\'' +
+				", price=" + price +
+				", createdDate=" + createdDate +
+				", deliveryDate=" + deliveryDate +
+				", deliveryTakeDate=" + deliveryTakeDate +
+				", total=" + total +
+				", status=" + status +
+				", payMethod=" + payMethod +
+				", deliveryStatus=" + deliveryStatus +
+				", idDelivery=" + idDelivery +
+				", exactCash=" + exactCash +
+				'}';
+	}
 }

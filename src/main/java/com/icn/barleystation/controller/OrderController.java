@@ -1,5 +1,7 @@
 package com.icn.barleystation.controller;
 
+import com.icn.barleystation.commons.CommonsHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import com.icn.barleystation.model.StackRequest;
 import com.icn.barleystation.service.IInventoryService;
 import com.icn.barleystation.service.IOrderService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/barley/order/")
 public class OrderController {
@@ -32,6 +35,7 @@ public class OrderController {
 
 	@PostMapping("/create")
 	public ResponseEntity<OrderResponse> createNewOrder(@RequestBody OrderRequest request) {
+		log.info(CommonsHelper.START + "[createNewOrder]");
 		OrderResponse fullResponse = new OrderResponse();
 
 		ResponseEntity<OrderResponse> responseOEntity = orderService.createNewOrder(request);
@@ -44,7 +48,7 @@ public class OrderController {
 						request.getOrderList().get(i).getIdItem().toString());
 				if (uptOut.getBody().getErrors() == null) {
 					status = HttpStatus.CREATED;
-					System.out.println("inventory res: " + uptOut.getBody().getStack());
+					log.info("inventory stack: " + uptOut.getBody().getStack());
 				} else {
 					throw new RestClientException(uptOut.getBody().getErrors().toString());
 				}

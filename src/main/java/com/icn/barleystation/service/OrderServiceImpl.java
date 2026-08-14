@@ -52,6 +52,7 @@ public class OrderServiceImpl implements IOrderService {
 				order.setPrice(request.getOrderList().get(i).getPrice());
 				order.setStatus(0);
 				order.setDeliveryStatus(0);
+				order.setExactCash(request.getExactCash());
 
 				orderRepo.save(order);
 				responseList.add(order);
